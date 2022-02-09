@@ -1,0 +1,46 @@
+stages:
+  - install-dependencies
+  - lint
+  - tests
+
+run-npm-install:
+  stage: install-dependencies
+  image: registry.sumatosoft.work/node:16.13.1
+  cache:
+    key: "$CI_PROJECT_NAME"
+    paths:
+      - node_modules
+  script:
+    - npm install
+
+run-eslint:
+  image: registry.sumatosoft.work/node:16.13.1
+  stage: lint
+  cache:
+    key: "$CI_PROJECT_NAME"
+    paths:
+      - node_modules
+  script:
+    - npm run lint
+
+run-test-ci:
+  stage: tests
+  variables:
+    POSTGRES_DB: a-shop_test
+    POSTGRES_HOST: "postgres"
+    POSTGRES_USER: "a-shop"
+    POSTGRES_PASSWORD: "password"
+  services:
+  - name: registry.sumatosoft.work/postgres:14.1
+    alias: postgres
+  image: registry.sumatosoft.work/node:16.13.1
+  cache:
+    key: "$CI_PROJECT_NAME"
+    paths:
+      - node_modules
+  before_script:
+    - echo -e "$CI_ENV" > config/test.env
+  script:
+    - apt update && apt install -y postgresql-client
+    - npm run test
+
