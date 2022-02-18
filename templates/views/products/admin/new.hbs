@@ -1,0 +1,107 @@
+<html lang='en'>
+
+  <head>
+    {{>head}}
+    <title>Product detail</title>
+  </head>
+
+  <body>
+    <div class='wrapper'>
+      {{> admin/headerAdmin}}
+      <main class='page'>
+        <section class='page__toolbar toolbar'>
+          <ul class='toolbar__list'>
+            <li class='toolbar__item'>
+              <button class='btn' title='Save'>
+                <span class='material-icons'>save</span>
+              </button>
+            </li>
+            <li class='toolbar__item'>
+              <button class='btn' title='Edit'>
+                <span class='material-icons'>edit</span>
+              </button>
+            </li>
+            <li class='toolbar__item'>
+              <button class='btn' title='Delete'>
+                <span class='material-icons'>delete</span>
+              </button>
+            </li>
+            <li class='toolbar__item'>
+              <button class='btn' title='Restore'>
+                <span class='material-icons'>restore_from_trash</span>
+              </button>
+            </li>
+            <li class='toolbar__item'>
+              <button class='btn' title='Close'>
+                <span class='material-icons'>close</span>
+              </button>
+            </li>
+          </ul>
+        </section>
+        <section class='page__product-block product-block'>
+          <div class='product-block__container __container'>
+            <div class='product-info card'>
+              <div class='card-body product-info-body'>
+                <form>
+                  <div class='form-row'>
+                    <div class='col-md-6'>
+                      <div class='img-container'>
+                        <img src='' alt='No image' />
+                      </div>
+                      <ul class='toolbar__list'>
+                        <li class='toolbar__item'>
+                          <button class='btn' title='Upload'>
+                            <span class='material-icons'>file_upload</span>
+                          </button>
+                        </li>
+                        <li class='toolbar__item'>
+                          <button class='btn' title='Delete'>
+                            <span class='material-icons'>delete</span>
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class='col-md-6'>
+                      <div class='form-group'>
+                        <label for='productName'>Product name:</label>
+                        <input
+                          type='text'
+                          class='form-control'
+                          id='productName'
+                        />
+                      </div>
+                      <div class='form-group'>
+                        <label for='vendorCode'>Vendor code:</label>
+                        <input
+                          type='text'
+                          class='form-control'
+                          id='vendorCode'
+                        />
+                      </div>
+                      <div class='form-group'>
+                        <label for='productPrice'>Price $:</label>
+                        <input
+                          type='number'
+                          class='form-control'
+                          id='productPrice'
+                        />
+                      </div>
+                      <div class='form-group'>
+                        <label for='productDescription'>Description:</label>
+                        <textarea
+                          class='form-control'
+                          id='productDescription'
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+
+</html>
