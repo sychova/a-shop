@@ -1,0 +1,47 @@
+<html lang='en'>
+
+  <head>
+    {{>head}}
+    <title>Products</title>
+  </head>
+
+  <body>
+    <div class='wrapper'>
+      {{> admin/headerAdmin}}
+      <main class='page'>
+        <section class='page__toolbar toolbar'>
+          <ul class='toolbar__list'>
+            <li class='toolbar__item'>
+              <button class='btn' title='View product'>
+                <span class='material-icons'>visibility</span>
+              </button>
+            </li>
+            <li class='toolbar__item'>
+              <button class='btn' title='Add product'>
+                <span class='material-icons'>note_add</span>
+              </button>
+            </li>
+            <li class='toolbar__item'>
+              <button class='btn' title='Edit product'>
+                <span class='material-icons'>edit</span>
+              </button>
+            </li>
+            <li class='toolbar__item'>
+              <button class='btn' title='Delete product'>
+                <span class='material-icons'>delete</span>
+              </button>
+            </li>
+            <li class='toolbar__item'>
+              <button class='btn' title='Restore product'>
+                <span class='material-icons'>restore_from_trash</span>
+              </button>
+            </li>
+          </ul>
+        </section>
+        {{>pagination}}
+        {{>products}}
+      </main>
+    </div>
+  </body>
+
+</html>

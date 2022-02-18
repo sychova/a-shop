@@ -1,0 +1,47 @@
+<html lang='en'>
+
+  <head>
+    {{>head}}
+    <title>Error</title>
+  </head>
+
+  <body>
+    <div class='wrapper'>
+      <header class='header'>
+        <div class='header__container'>
+          <a href='#' class='__logo'>
+            <img src='/img/logo.png' alt='Logo' />
+          </a>
+        </div>
+      </header>
+      <main class='page'>
+        <section class='page__toolbar toolbar'>
+          <ul class='toolbar__list'>
+            <li class='toolbar__item'>
+              <button
+                type='button'
+                class='btn'
+                data-toggle='tooltip'
+                data-placement='bottom'
+                title='Home'
+              >
+                <span class='material-icons'>home</span>
+              </button>
+            </li>
+          </ul>
+        </section>
+        <section class='page__error error'>
+          <div class='info-block__container __container'>
+            <div class='order-info card'>
+              <h3 class='card-header'>Error info</h3>
+              <div class='card-body order-info-body'>
+                <span>Error</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+
+</html>
