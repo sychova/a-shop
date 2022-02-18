@@ -27,4 +27,7 @@ router.post('/orders', user.orders.create)
 router.get('/admin/orders', admin.orders.ordersList)
 router.get('/admin/orders/:orderId', admin.orders.show)
 
+router.get('/admin/promos/new', admin.promos.newPromo)
+router.post('/admin/promos', admin.promos.create)
+
 module.exports = router
