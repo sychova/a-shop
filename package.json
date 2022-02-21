@@ -54,6 +54,7 @@
     "express": "^4.17.2",
     "hbs": "^4.2.0",
     "knex": "^1.0.2",
+    "knex-case-converter-plugin": "^0.1.1",
     "pg": "^8.7.3",
     "pg-connection-string": "^2.5.0"
   }
