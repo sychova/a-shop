@@ -1,8 +1,8 @@
 exports.seed = (knex) => {
-  return knex('orders')
+  return knex('promos')
     .del()
     .then(() => {
-      return knex('orders').insert([
+      return knex('promos').insert([
         {
           code: 'PROMOCOD',
           value: 10,

@@ -16,6 +16,6 @@ exports.up = async (knex) => {
 }
 
 exports.down = async (knex) => {
-  await knex.raw('DROP TYPE status')
   await knex.schema.dropTable('products')
+  await knex.raw('DROP TYPE product_status')
 }

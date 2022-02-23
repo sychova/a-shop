@@ -9,11 +9,11 @@ exports.up = async (knex) => {
       useNative: true,
       enumName: 'delivery_method',
     }).notNullable()
-    t.text('delivery_address').notNullable()
+    t.text('delivery_address')
   })
 }
 
 exports.down = async (knex) => {
-  await knex.raw('DROP TYPE delivery_method')
   await knex.schema.dropTable('orders')
+  await knex.raw('DROP TYPE delivery_method')
 }
