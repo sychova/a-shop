@@ -1,5 +1,8 @@
+const { productsFetcher } = require('../services/index')
+
 const productsList = async (req, res) => {
-  res.render('./products/index')
+  const products = await productsFetcher.call()
+  res.render('./products/index', { products })
 }
 
 const show = async (req, res) => {

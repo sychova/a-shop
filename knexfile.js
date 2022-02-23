@@ -1,5 +1,8 @@
 const { parse } = require('pg-connection-string')
-const plugin = require('knex-case-converter-plugin')
+const {
+  wrapIdentifier,
+  postProcessResponse,
+} = require('knex-case-converter-plugin')
 
 module.exports = {
   client: 'pg',
@@ -13,5 +16,6 @@ module.exports = {
   seeds: {
     directory: `${__dirname}/db/seeds`,
   },
-  ...plugin,
+  wrapIdentifier,
+  postProcessResponse,
 }

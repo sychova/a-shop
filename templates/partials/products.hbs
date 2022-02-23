@@ -22,51 +22,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope='row'>
-            <input class='form-check-input' type='checkbox' value='' />
-          </th>
-          <td>
-            <img
-              src='/img/products/STRANDMON.png'
-              alt='Product'
-              class='img-thumbnail'
-            />
-          </td>
-          <td class='col-pink'>STRANDMON</td>
-          <td class='col-pantone_purple'>Ikea</td>
-          <td class='price col-off_blue'>179</td>
-        </tr>
-        <tr>
-          <th scope='row'>
-            <input class='form-check-input' type='checkbox' value='' />
-          </th>
-          <td>
-            <img
-              src='/img/products/EKOLSUND.png'
-              alt='Product'
-              class='img-thumbnail'
-            />
-          </td>
-          <td class='col-pink'>EKOLSUND</td>
-          <td class='col-pantone_purple'>Ikea</td>
-          <td class='price col-off_blue'>349</td>
-        </tr>
-        <tr>
-          <th scope='row'>
-            <input class='form-check-input' type='checkbox' value='' />
-          </th>
-          <td>
-            <img
-              src='/img/products/SÖDERHAMN.png'
-              alt='Product'
-              class='img-thumbnail'
-            />
-          </td>
-          <td class='col-pink'>SÖDERHAMN</td>
-          <td class='col-pantone_purple'>Ikea</td>
-          <td class='price col-off_blue'>349</td>
-        </tr>
+        {{#each products}}
+          <tr>
+            <th scope='row'>
+              <input class='form-check-input' type='checkbox' value='' data-value='{{id}}'' />
+            </th>
+            <td>
+              <img src='{{imagePath}}' alt='Product' class='img-thumbnail' />
+            </td>
+            <td class='col-pink'>{{name}}</td>
+            <td class='col-pantone_purple'>{{vendorCode}}</td>
+            <td class='price col-off_blue'>{{price}}</td>
+          </tr>
+        {{/each}}
       </tbody>
     </table>
   </div>
