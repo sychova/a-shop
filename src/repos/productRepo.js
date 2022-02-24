@@ -10,10 +10,6 @@ class ProductRepo extends BaseRepo {
     return 'products'
   }
 
-  all() {
-    return this.query.select()
-  }
-
   allActive() {
     return this.query.where({ product_status: 'active' })
   }

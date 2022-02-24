@@ -34,7 +34,6 @@ exports.seed = (knex) => {
           vendorCode: 'VENDOR2',
           price: 100,
           description: 'A very comfortable chair',
-          imagePath: '../../img/products/chair.jpg',
         },
         {
           id: 5,

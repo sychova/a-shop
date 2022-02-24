@@ -42,6 +42,10 @@ class BaseRepo {
   throwNotFound() {
     throw new NotFound(this.constructor.entity.name)
   }
+
+  all() {
+    return this.query.select()
+  }
 }
 
 module.exports = BaseRepo

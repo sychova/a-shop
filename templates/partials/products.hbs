@@ -25,10 +25,24 @@
         {{#each products}}
           <tr>
             <th scope='row'>
-              <input class='form-check-input' type='checkbox' value='' data-value='{{id}}'' />
+              <input
+                class='form-check-input'
+                type='checkbox'
+                value=''
+                data-value='{{id}}'
+              />
             </th>
             <td>
-              <img src='{{imagePath}}' alt='Product' class='img-thumbnail' />
+              {{#if imagePath}}
+                <img src='{{imagePath}}' alt='Product' class='img-thumbnail' />
+              {{/if}}
+              {{#unless imagePath}}
+                <img
+                  src='../../img/products/stub.png'
+                  alt='Product'
+                  class='img-thumbnail'
+                />
+              {{/unless}}
             </td>
             <td class='col-pink'>{{name}}</td>
             <td class='col-pantone_purple'>{{vendorCode}}</td>
