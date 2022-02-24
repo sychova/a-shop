@@ -1,4 +1,4 @@
-const { productsFetcher } = require('../../services/admin/index')
+const { productsFetcher } = require('../../services/products/admin/index')
 
 const productsList = async (req, res) => {
   const products = await productsFetcher.call()

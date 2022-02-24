@@ -1,4 +1,4 @@
-const { productsFetcher } = require('../services/index')
+const { productsFetcher } = require('../services/products/index')
 
 const productsList = async (req, res) => {
   const products = await productsFetcher.call()

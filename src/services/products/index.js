@@ -1,4 +1,4 @@
-const { productRepo } = require('../repos')
+const { productRepo } = require('../../repos')
 const ProductsFetcher = require('./productsFetcher')
 
 module.exports = {
