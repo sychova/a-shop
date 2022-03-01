@@ -12,27 +12,27 @@
         <section class='page__toolbar toolbar'>
           <ul class='toolbar__list'>
             <li class='toolbar__item'>
-              <button class='btn' title='View product'>
+              <button id='view' class='btn' title='View product'>
                 <span class='material-icons'>visibility</span>
               </button>
             </li>
             <li class='toolbar__item'>
-              <button class='btn' title='Add product'>
+              <button id='add' class='btn' title='Add product'>
                 <span class='material-icons'>note_add</span>
               </button>
             </li>
             <li class='toolbar__item'>
-              <button class='btn' title='Edit product'>
+              <button id='edit' class='btn' title='Edit product'>
                 <span class='material-icons'>edit</span>
               </button>
             </li>
             <li class='toolbar__item'>
-              <button class='btn' title='Delete product'>
+              <button id='delete' class='btn' title='Delete product'>
                 <span class='material-icons'>delete</span>
               </button>
             </li>
             <li class='toolbar__item'>
-              <button class='btn' title='Restore product'>
+              <button id='restore' class='btn' title='Restore product'>
                 <span class='material-icons'>restore_from_trash</span>
               </button>
             </li>
@@ -43,6 +43,8 @@
         {{>products}}
       </main>
     </div>
+    {{>scripts}}
+    <script src='/js/products.js'></script>
   </body>
 
 </html>
