@@ -12,9 +12,6 @@
         <section class='page__toolbar toolbar'>
           <ul class='toolbar__list'>
             <li class='toolbar__item'>
-              <button class='btn' title='Save'>
-                <span class='material-icons'>save</span>
-              </button>
             </li>
             <li class='toolbar__item'>
               <button class='btn' title='Edit'>
@@ -42,7 +39,7 @@
           <div class='product-block__container __container'>
             <div class='product-info card'>
               <div class='card-body product-info-body'>
-                <form>
+                <form action='/admin/products' method='POST'>
                   <div class='form-row'>
                     <div class='col-md-6'>
                       <div class='img-container'>
@@ -68,6 +65,7 @@
                           type='text'
                           class='form-control'
                           id='productName'
+                          name='productName'
                         />
                       </div>
                       <div class='form-group'>
@@ -76,6 +74,7 @@
                           type='text'
                           class='form-control'
                           id='vendorCode'
+                          name='vendorCode'
                         />
                       </div>
                       <div class='form-group'>
@@ -84,6 +83,7 @@
                           type='number'
                           class='form-control'
                           id='productPrice'
+                          name='productPrice'
                         />
                       </div>
                       <div class='form-group'>
@@ -91,8 +91,10 @@
                         <textarea
                           class='form-control'
                           id='productDescription'
+                          name='productDescription'
                         ></textarea>
                       </div>
+                      <button type="submit" id='save' class='btn' title='Save'>Save</button>
                     </div>
                   </div>
                 </form>
@@ -102,6 +104,9 @@
         </section>
       </main>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src='/js/products.js'></script>
   </body>
 
 </html>

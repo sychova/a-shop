@@ -45,6 +45,7 @@ li {
 .btn {
   background-color: var(--pink) !important;
   color: #ffffff !important;
+  border: none !important;
 }
 
 .wrapper {
@@ -238,7 +239,6 @@ td img:hover {
 .amount_setting > button {
   background-color: var(--pink);
   color: #ffffff;
-  border: none;
   font-weight: 400;
   font-size: 32px;
   line-height: 115.6%;

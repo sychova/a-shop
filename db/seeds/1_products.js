@@ -4,7 +4,6 @@ exports.seed = (knex) => {
     .then(() => {
       return knex('products').insert([
         {
-          id: 1,
           name: 'Apple',
           vendorCode: 'VENDOR1',
           price: 10,
@@ -12,7 +11,6 @@ exports.seed = (knex) => {
           imagePath: '../../img/products/apple.jpg',
         },
         {
-          id: 2,
           name: 'Orange',
           vendorCode: 'VENDOR1',
           price: 20,
@@ -20,7 +18,6 @@ exports.seed = (knex) => {
           imagePath: '../../img/products/orange.jpg',
         },
         {
-          id: 3,
           name: 'Apricot',
           vendorCode: 'VENDOR1',
           price: 30,
@@ -29,14 +26,12 @@ exports.seed = (knex) => {
           product_status: 'deleted',
         },
         {
-          id: 4,
           name: 'Chair',
           vendorCode: 'VENDOR2',
           price: 100,
           description: 'A very comfortable chair',
         },
         {
-          id: 5,
           name: 'Table',
           vendorCode: 'VENDOR2',
           price: 200,
@@ -44,7 +39,6 @@ exports.seed = (knex) => {
           imagePath: '../../img/products/table.jpg',
         },
         {
-          id: 6,
           name: 'Sofa',
           vendorCode: 'VENDOR2',
           price: 300,

@@ -1,8 +1,12 @@
-const { productsFetcher } = require('../../services/products/admin/index')
+const {
+  productsFetcher,
+  productCreator,
+} = require('../../services/products/admin/index')
 
 const productsList = async (req, res) => {
+  const messages = await req.consumeFlash('info')
   const products = await productsFetcher.call()
-  res.render('./products/admin/index', { products })
+  res.render('./products/admin/index', { products, messages })
 }
 
 const show = async (req, res) => {
@@ -14,7 +18,13 @@ const newProduct = async (req, res) => {
 }
 
 const create = async (req, res) => {
-  res.send('NOT IMPLEMENTED: Creating product')
+  try {
+    await productCreator.call(req.body)
+    await req.flash('info', 'Your product has successfully been created!')
+    res.redirect('/admin/products')
+  } catch (error) {
+    res.status(500).json(error)
+  }
 }
 
 const edit = async (req, res) => {
