@@ -1,32 +1,76 @@
 <html lang='en'>
 
-  <head>
-    {{>head}}
-    <title>Products</title>
-  </head>
+<head>
+  {{>head}}
+  <title>Products</title>
+</head>
 
-  <body>
-    <div class='wrapper'>
-      {{>header}}
-      <main class='page'>
-        <section class='page__toolbar toolbar'>
-          <ul class='toolbar__list'>
-            <li class='toolbar__item'>
-              <button class='btn' title='View product'>
-                <span class='material-icons'>visibility</span>
-              </button>
-            </li>
-            <li class='toolbar__item'>
-              <button class='btn' title='Add product'>
-                <span class='material-icons'>add_shopping_cart</span>
-              </button>
-            </li>
-          </ul>
-        </section>
-        {{>pagination}}
-        {{>products}}
-      </main>
-    </div>
-  </body>
+<body>
+  <div class='wrapper'>
+    {{>header}}
+    <main class='page'>
+      <section class='page__toolbar toolbar'>
+        <ul class='toolbar__list'>
+          <li class='toolbar__item'>
+            <button class='btn' title='View product'>
+              <span id='view' class='material-icons'>visibility</span>
+            </button>
+          </li>
+          <li class='toolbar__item'>
+            <button class='btn' title='Add product'>
+              <span class='material-icons'>add_shopping_cart</span>
+            </button>
+          </li>
+        </ul>
+      </section>
+      {{>pagination}}
+      <section class='page__table'>
+        <div class='table__container __container'>
+          <table class='table table-hover'>
+            <thead>
+              <tr>
+                <th scope='col'>
+                  <input class='form-check-input multSelect' type='checkbox' title='Select all' />
+                  <label class='form-check-label' for='flexCheckDefault'>Select</label>
+                </th>
+                <th scope='col'>Image</th>
+                <th scope='col'>Product name</th>
+                <th scope='col'>Vendor code</th>
+                <th scope='col'>Price</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each products}}
+                <tr data-id={{id}}>
+                  <th scope='row'>
+                    <input class='form-check-input singleSelect' type='checkbox' />
+                  </th>
+                  <td>
+                    {{#if imagePath}}
+                      <img src='{{imagePath}}' alt='Product' class='img-thumbnail' title='Click for more details' />
+                    {{else}}
+                      <img src='/img/products/stub.png' alt='Product' class='img-thumbnail' />
+                    {{/if}}
+                  </td>
+                  <td class='col-pink'>{{name}}</td>
+                  <td class='col-pantone_purple'>{{vendorCode}}</td>
+                  <td class='price col-off_blue'>{{price}}</td>
+                  <td>
+                    <a href='/products/{{id}}' class='btn' title='View'>
+                      <span class='material-icons'>visibility</span>
+                    </a>
+                  </td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+  {{>scripts}}
+  <script src='/js/products.js'></script>
+</body>
 
 </html>
