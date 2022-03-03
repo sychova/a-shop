@@ -5,8 +5,8 @@ class Product extends BaseEntity {
     return this.attr.name
   }
 
-  get vendor() {
-    return this.attr.vendor
+  get vendorCode() {
+    return this.attr.vendorCode
   }
 
   get price() {
@@ -15,6 +15,10 @@ class Product extends BaseEntity {
 
   get description() {
     return this.attr.description
+  }
+
+  get imagePath() {
+    return this.attr.imagePath
   }
 }
 

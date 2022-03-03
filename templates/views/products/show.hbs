@@ -1,80 +1,69 @@
 <html lang='en'>
 
-  <head>
-    {{>head}}
-    <title>Product detail</title>
-  </head>
+<head>
+  {{>head}}
+  <title>Product detail</title>
+</head>
 
-  <body>
-    <div class='wrapper'>
-      {{>header}}
-      <main class='page'>
-        <section class='page__toolbar toolbar'>
-          <ul class='toolbar__list'>
-            <li class='toolbar__item'>
-              <button class='btn' title='Add product'>
-                <span class='material-icons'>add_shopping_cart</span>
-              </button>
-            </li>
-            <li class='toolbar__item'>
-              <button class='btn' title='Close'>
-                <span class='material-icons'>close</span>
-              </button>
-            </li>
-          </ul>
-        </section>
-        <section class='page__product-block product-block'>
-          <div class='product-block__container __container'>
-            <div class='product-info card'>
-              <div class='card-body product-info-body'>
-                <form>
-                  <div class='form-row'>
-                    <div class='col-md-6'>
-                      <div class='img-container'>
-                        <img src='/img/products/STRANDMON.png' />
-                      </div>
-                    </div>
-                    <div class='col-md-6'>
-                      <div class='form-group'>
-                        <label for='productName'>Product name:</label>
-                        <input
-                          type='text'
-                          class='form-control'
-                          id='productName'
-                        />
-                      </div>
-                      <div class='form-group'>
-                        <label for='vendorCode'>Vendor code:</label>
-                        <input
-                          type='text'
-                          class='form-control'
-                          id='vendorCode'
-                        />
-                      </div>
-                      <div class='form-group'>
-                        <label for='productPrice'>Price $:</label>
-                        <input
-                          type='number'
-                          class='form-control'
-                          id='productPrice'
-                        />
-                      </div>
-                      <div class='form-group'>
-                        <label for='productDescription'>Description:</label>
-                        <textarea
-                          class='form-control'
-                          id='productDescription'
-                        ></textarea>
-                      </div>
+<body>
+  <div class='wrapper'>
+    {{>header}}
+    <main class='page'>
+      <section class='page__toolbar toolbar'>
+        <ul class='toolbar__list'>
+          <li class='toolbar__item'>
+            <button class='btn' title='Add product'>
+              <span class='material-icons'>add_shopping_cart</span>
+            </button>
+          </li>
+          <li class='toolbar__item'>
+            <a id='close' href='/products' class='btn' title='Close'>
+              <span class='material-icons'>close</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class='page__product-block product-block'>
+        <div class='product-block__container __container'>
+          <div class='product-info card'>
+            <div class='card-body product-info-body'>
+              <form>
+                <div class='form-row'>
+                  <div class='col-md-6'>
+                    <div class='img-container'>
+                      {{#if product.imagePath}}
+                        <img src='{{product.imagePath}}' class='img-container' alt='Product' />
+                      {{else}}
+                        <img src='../../img/products/stub.png' alt='Product' class='img-container' />
+                      {{/if}}
                     </div>
                   </div>
-                </form>
-              </div>
+                  <div class='col-md-6'>
+                    <div class='form-group'>
+                      <label for='productName'>Product name:</label>
+                      <input type='text' class='form-control' id='productName' value='{{product.name}}' readonly />
+                    </div>
+                    <div class='form-group'>
+                      <label for='vendorCode'>Vendor code:</label>
+                      <input type='text' class='form-control' id='vendorCode' value='{{product.vendorCode}}' readonly />
+                    </div>
+                    <div class='form-group'>
+                      <label for='productPrice'>Price $:</label>
+                      <input type='number' class='form-control' id='productPrice' value='{{product.price}}' readonly />
+                    </div>
+                    <div class='form-group'>
+                      <label for='productDescription'>Description:</label>
+                      <textarea class='form-control' id='productDescription' readonly>{{product.description}}</textarea>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
-        </section>
-      </main>
-    </div>
-  </body>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
 
 </html>

@@ -27,6 +27,18 @@ class ProductRepo extends BaseRepo {
       .returning('*')
     return this.map(record)
   }
+
+  async findById(id) {
+    const [record] = await this.query.where({ id }).limit(1)
+    return this.mapOrNotFound(record)
+  }
+
+  async findActiveById(id) {
+    const [record] = await this.query
+      .where({ id, productStatus: 'active' })
+      .limit(1)
+    return this.mapOrNotFound(record)
+  }
 }
 
 module.exports = ProductRepo

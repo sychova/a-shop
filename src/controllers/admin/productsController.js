@@ -1,6 +1,7 @@
 const {
   productsFetcher,
   productCreator,
+  productFetcher,
 } = require('../../services/products/admin/index')
 
 const productsList = async (req, res) => {
@@ -10,7 +11,14 @@ const productsList = async (req, res) => {
 }
 
 const show = async (req, res) => {
-  res.render('./products/admin/show')
+  try {
+    const { productId } = req.params
+    const product = await productFetcher.call(productId)
+    res.render('./products/admin/show', { product })
+  } catch (error) {
+    console.error(error)
+    res.status(500).render('./errorAdmin', { error: error.message })
+  }
 }
 
 const newProduct = async (req, res) => {
@@ -23,7 +31,7 @@ const create = async (req, res) => {
     await req.flash('info', 'Your product has successfully been created!')
     res.redirect('/admin/products')
   } catch (error) {
-    res.status(500).json(error)
+    res.status(500).render('./errorAdmin', { error: error.message })
   }
 }
 

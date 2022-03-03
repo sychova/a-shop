@@ -1,18 +1,11 @@
 <section class='page__table'>
   <div class='table__container __container'>
-    <table class='table'>
+    <table class='table table-hover'>
       <thead>
         <tr>
           <th scope='col'>
-            <input
-              class='form-check-input multSelect'
-              type='checkbox'
-              title='Select all'
-            />
-            <label
-              class='form-check-label'
-              for='flexCheckDefault'
-            >Select</label>
+            <input class='form-check-input multSelect' type='checkbox' title='Select all' />
+            <label class='form-check-label' for='flexCheckDefault'>Select</label>
           </th>
           <th scope='col'>Image</th>
           <th scope='col'>Product name</th>
@@ -22,25 +15,17 @@
       </thead>
       <tbody>
         {{#each products}}
-          <tr>
+          <tr data-id={{id}}>
             <th scope='row'>
-              <input
-                class='form-check-input singleSelect'
-                type='checkbox'
-                data-id={{id}}
-              />
+              <input class='form-check-input singleSelect' type='checkbox' />
             </th>
             <td>
               {{#if imagePath}}
-                <img src='{{imagePath}}' alt='Product' class='img-thumbnail' />
+                <img src='{{imagePath}}' alt='Product' class='img-thumbnail productLink'
+                  title='Click for more details' />
+              {{else}}
+                <img src='../../img/products/stub.png' alt='Product' class='img-thumbnail' />
               {{/if}}
-              {{#unless imagePath}}
-                <img
-                  src='../../img/products/stub.png'
-                  alt='Product'
-                  class='img-thumbnail'
-                />
-              {{/unless}}
             </td>
             <td class='col-pink'>{{name}}</td>
             <td class='col-pantone_purple'>{{vendorCode}}</td>

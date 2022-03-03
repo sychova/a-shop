@@ -4,10 +4,7 @@ const selectProduct = (item) => {
   // eslint-disable-next-line no-param-reassign
   item.checked = true
   const productId = item.dataset.id
-  const selectedIndex = selectedProducts.indexOf(parseInt(productId, 10))
-  if (selectedIndex < 0) {
-    selectedProducts.push(parseInt(productId, 10))
-  }
+  selectedProducts.push(parseInt(productId, 10))
 }
 
 const unselectProduct = (item) => {
@@ -18,8 +15,8 @@ const unselectProduct = (item) => {
 }
 
 const initSingleSelectors = () => {
-  const productList = document.querySelectorAll('.singleSelect')
-  productList.forEach((item) => {
+  const singleProduct = document.querySelectorAll('.singleSelect')
+  singleProduct.forEach((item) => {
     item.addEventListener('click', () => {
       if (!item.checked) return unselectProduct(item)
       return selectProduct(item)
