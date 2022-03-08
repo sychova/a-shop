@@ -1,43 +1,59 @@
-const selectedProducts = []
+/* eslint-disable no-param-reassign */
 
-const selectProduct = (item) => {
-  // eslint-disable-next-line no-param-reassign
-  item.checked = true
-  const productId = item.dataset.id
-  selectedProducts.push(parseInt(productId, 10))
-}
-
-const unselectProduct = (item) => {
-  // eslint-disable-next-line no-param-reassign
-  item.checked = false
-  const selectedIndex = selectedProducts.indexOf(parseInt(item, 10))
-  selectedProducts.splice(selectedIndex, 1)
-}
-
-const initSingleSelectors = () => {
-  const singleProduct = document.querySelectorAll('.singleSelect')
-  singleProduct.forEach((item) => {
-    item.addEventListener('click', () => {
-      if (!item.checked) return unselectProduct(item)
-      return selectProduct(item)
+const initMultiSelectors = () => {
+  const productList = document.querySelectorAll('.singleSelect')
+  const multProducts = document.querySelector('.multSelect')
+  multProducts.addEventListener('click', () => {
+    console.log(multProducts.checked)
+    productList.forEach((item) => {
+      if (multProducts.checked) {
+        item.checked = true
+      } else {
+        item.checked = false
+      }
     })
   })
 }
 
-const initMultySelectors = () => {
+const checkSelected = () => {
   const productList = document.querySelectorAll('.singleSelect')
-  const multProducts = document.querySelector('.multSelect')
-  multProducts.addEventListener('click', () => {
-    productList.forEach((item) => {
-      if (!multProducts.checked) return unselectProduct(item)
-      return selectProduct(item)
+  const selectedProducts = []
+  productList.forEach((item) => {
+    if (item.checked) selectedProducts.push(item.dataset.id)
+  })
+  return selectedProducts
+}
+
+const initToolbarEvents = () => {
+  document.getElementById('delete').addEventListener('click', async () => {
+    const ids = checkSelected()
+    await fetch('/api/admin/products', {
+      redirect: 'manual',
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ids }),
     })
+    window.location.href = '/admin/products'
+  })
+  document.getElementById('restore').addEventListener('click', async () => {
+    const ids = checkSelected()
+    await fetch('/api/admin/products/restore', {
+      redirect: 'manual',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ids }),
+    })
+    window.location.href = '/admin/products'
   })
 }
 
 const initEvents = () => {
-  initSingleSelectors()
-  initMultySelectors()
+  initMultiSelectors()
+  initToolbarEvents()
 }
 
 document.addEventListener('DOMContentLoaded', initEvents)

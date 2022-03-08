@@ -7,7 +7,7 @@
 
 <body>
   <div class='wrapper'>
-    {{> admin/header}}
+    {{>admin/header}}
     <main class='page'>
       <section class='page__toolbar toolbar'>
         <ul class='toolbar__list'>
@@ -17,14 +17,17 @@
             </button>
           </li>
           <li class='toolbar__item'>
-            <button class='btn' title='Delete'>
+            <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#deleteModal' title='Delete'
+              data-id={{product.id}}>
               <span class='material-icons'>delete</span>
             </button>
           </li>
           <li class='toolbar__item'>
-            <button class='btn' title='Restore'>
-              <span class='material-icons'>restore_from_trash</span>
-            </button>
+            <form action="/admin/products/{{product.id}}/restore" method='POST'>
+              <button name='restore' type="submit" class="btn" title='Restore'>
+                <span class='material-icons'>restore_from_trash</span>
+              </button>
+            </form>
           </li>
           <li class='toolbar__item'>
             <a id='close' href='/admin/products' class='btn' title='Close'>
@@ -74,6 +77,8 @@
       </section>
     </main>
   </div>
+  {{>admin/modalDeleteSingle}}
+  {{>scripts}}
 </body>
 
 </html>

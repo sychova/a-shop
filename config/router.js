@@ -19,6 +19,19 @@ router.post('/admin/products', admin.products.create)
 router.get('/admin/products/:productId', admin.products.show)
 router.get('/admin/products/:productId/edit', admin.products.edit)
 router.put('/admin/products/:productId/update', admin.products.update)
+router.post(
+  '/admin/products/:productId/delete',
+  admin.products.deleteSingleProduct,
+)
+router.delete('/api/admin/products', admin.products.deleteMultipleProducts)
+router.post(
+  '/admin/products/:productId/restore',
+  admin.products.restoreSingleProduct,
+)
+router.post(
+  '/api/admin/products/restore',
+  admin.products.restoreMultipleProducts,
+)
 
 router.get('/orders/new/cart', user.orders.cart)
 router.get('/orders/new/checkout', user.orders.checkout)

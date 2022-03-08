@@ -2,6 +2,8 @@ const {
   productsFetcher,
   productCreator,
   productFetcher,
+  productDelete,
+  productRestore,
 } = require('../../services/products/admin/index')
 
 const productsList = async (req, res) => {
@@ -43,6 +45,46 @@ const update = async (req, res) => {
   res.send('NOT IMPLEMENTED: Updating product')
 }
 
+const deleteSingleProduct = async (req, res) => {
+  try {
+    await productDelete.call([req.params.productId])
+    res.redirect('/admin/products')
+  } catch (error) {
+    console.error(error)
+    res.status(500).render('./errorAdmin', { error: error.message })
+  }
+}
+
+const deleteMultipleProducts = async (req, res) => {
+  try {
+    await productDelete.call(req.body.ids)
+    res.status(204).json()
+  } catch (error) {
+    console.error(error)
+    res.status(500).render('./errorAdmin', { error: error.message })
+  }
+}
+
+const restoreSingleProduct = async (req, res) => {
+  try {
+    await productRestore.call([req.params.productId])
+    res.redirect('/admin/products')
+  } catch (error) {
+    console.error(error)
+    res.status(500).render('./errorAdmin', { error: error.message })
+  }
+}
+
+const restoreMultipleProducts = async (req, res) => {
+  try {
+    await productRestore.call(req.body.ids)
+    res.status(204).json()
+  } catch (error) {
+    console.error(error)
+    res.status(500).render('./errorAdmin', { error: error.message })
+  }
+}
+
 module.exports = {
   productsList,
   show,
@@ -50,4 +92,8 @@ module.exports = {
   create,
   edit,
   update,
+  deleteSingleProduct,
+  deleteMultipleProducts,
+  restoreSingleProduct,
+  restoreMultipleProducts,
 }

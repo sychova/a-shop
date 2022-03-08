@@ -11,7 +11,7 @@ class ProductRepo extends BaseRepo {
   }
 
   allActive() {
-    return this.query.where({ product_status: 'active' })
+    return this.query.where({ productStatus: 'active' })
   }
 
   async create(product) {
@@ -22,7 +22,6 @@ class ProductRepo extends BaseRepo {
         price: product.productPrice,
         description: product.productDescription,
         imagePath: product.imagePath,
-        productStatus: product.productStatus,
       })
       .returning('*')
     return this.map(record)
@@ -38,6 +37,26 @@ class ProductRepo extends BaseRepo {
       .where({ id, productStatus: 'active' })
       .limit(1)
     return this.mapOrNotFound(record)
+  }
+
+  async deleteProducts(ids) {
+    const [record] = await this.query
+      .whereIn('id', ids)
+      .update({
+        productStatus: 'deleted',
+      })
+      .returning('*')
+    return this.map(record)
+  }
+
+  async restoreProducts(ids) {
+    const [record] = await this.query
+      .whereIn('id', ids)
+      .update({
+        productStatus: 'active',
+      })
+      .returning('*')
+    return this.map(record)
   }
 }
 

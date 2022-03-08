@@ -20,6 +20,7 @@ app.use(
 )
 app.use(flash({ sessionKeyName: 'flashMessage' }))
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use('/api', bodyParser.json())
 app.use(router)
 
 const publicDirPath = path.join(__dirname, '../public')
