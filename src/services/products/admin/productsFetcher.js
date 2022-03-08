@@ -1,6 +1,6 @@
-const BaseProductsFetcher = require('../baseProductsFetcher')
+const BaseProduct = require('../baseProduct')
 
-class AdminProductsFetcher extends BaseProductsFetcher {
+class AdminProductsFetcher extends BaseProduct {
   async call() {
     const products = await this.productRepo.all()
     return products

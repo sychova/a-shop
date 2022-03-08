@@ -1,8 +1,6 @@
-class ProductCreator {
-  constructor({ productRepo }) {
-    this.productRepo = productRepo
-  }
+const BaseProduct = require('../baseProduct')
 
+class ProductCreator extends BaseProduct {
   call(product) {
     try {
       return this.createProduct(product)

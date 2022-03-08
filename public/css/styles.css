@@ -289,3 +289,7 @@ td img:hover {
   height: 200px !important;
   object-fit: contain;
 }
+
+button span {
+  pointer-events: none;
+}

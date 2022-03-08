@@ -17,12 +17,8 @@
             </a>
           </li>
           <li class='toolbar__item'>
-            <button id='edit' class='btn' title='Edit product'>
-              <span class='material-icons'>edit</span>
-            </button>
-          </li>
-          <li class='toolbar__item'>
-            <button id='delete' class='btn' title='Delete product'>
+            <button type='button' class="btn btn-primary" data-toggle="modal" data-target="#deleteModal"
+              title='Delete product'>
               <span class='material-icons'>delete</span>
             </button>
           </li>
@@ -34,7 +30,7 @@
         </ul>
       </section>
       {{>pagination}}
-      {{>toastSuccess}}
+      {{>toast}}
       <section class='page__table'>
         <div class='table__container __container'>
           <table class='table table-hover'>
@@ -53,13 +49,13 @@
             </thead>
             <tbody>
               {{#each products}}
-                <tr data-id={{id}}>
+                <tr>
                   <th scope='row'>
-                    <input class='form-check-input singleSelect' type='checkbox' />
+                    <input class='form-check-input singleSelect' type='checkbox' data-id={{id}} />
                   </th>
                   <td>
                     {{#if imagePath}}
-                      <img src='{{imagePath}}' alt='Product' class='img-thumbnail' title='Click for more details' />
+                      <img src='{{imagePath}}' alt='Product' class='img-thumbnail' />
                     {{else}}
                       <img src='/img/products/stub.png' alt='Product' class='img-thumbnail' />
                     {{/if}}
@@ -83,6 +79,7 @@
       </section>
     </main>
   </div>
+  {{>admin/modalDeleteMulti}}
   {{>scripts}}
   <script src='/js/admin/products.js'></script>
 </body>

@@ -6,7 +6,7 @@ const {
 const productsList = async (req, res) => {
   const messages = await req.consumeFlash('info')
   const products = await productsFetcher.call()
-  res.render('/products/index', { products, messages })
+  res.render('./products/index', { products, messages })
 }
 
 const show = async (req, res) => {
