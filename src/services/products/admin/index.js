@@ -4,6 +4,7 @@ const AdminProductFetcher = require('./productFetcher')
 const ProductCreator = require('./productCreator')
 const ProductDeleteService = require('./productDeleteService')
 const ProductRestoreService = require('./productRestoreService')
+const AdminProductUpdate = require('./productUpdate')
 
 module.exports = {
   productsFetcher: new AdminProductsFetcher({ productRepo }),
@@ -11,4 +12,5 @@ module.exports = {
   productCreator: new ProductCreator({ productRepo }),
   productDelete: new ProductDeleteService({ productRepo }),
   productRestore: new ProductRestoreService({ productRepo }),
+  productUpdate: new AdminProductUpdate({ productRepo }),
 }

@@ -14,24 +14,6 @@ class ProductRepo extends BaseRepo {
     return this.query.where({ productStatus: 'active' })
   }
 
-  async create(product) {
-    const [record] = await this.query
-      .insert({
-        name: product.productName,
-        vendorCode: product.vendorCode,
-        price: product.productPrice,
-        description: product.productDescription,
-        imagePath: product.imagePath,
-      })
-      .returning('*')
-    return this.map(record)
-  }
-
-  async findById(id) {
-    const [record] = await this.query.where({ id }).limit(1)
-    return this.mapOrNotFound(record)
-  }
-
   async findActiveById(id) {
     const [record] = await this.query
       .where({ id, productStatus: 'active' })

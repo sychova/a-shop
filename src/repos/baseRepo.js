@@ -40,11 +40,29 @@ class BaseRepo {
   }
 
   throwNotFound() {
-    throw new NotFound(this.constructor.entity.name)
+    throw new NotFound(this.constructor.Entity.name)
   }
 
   all() {
     return this.query.select()
+  }
+
+  async findById(id) {
+    const [record] = await this.query.where({ id }).limit(1)
+    return this.mapOrNotFound(record)
+  }
+
+  async create(params) {
+    const [record] = await this.query.insert(params).returning('*')
+    return this.map(record)
+  }
+
+  async update(id, params) {
+    const [record] = await this.query
+      .where({ id })
+      .update(params)
+      .returning('*')
+    return this.map(record)
   }
 }
 

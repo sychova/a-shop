@@ -12,22 +12,9 @@
       <section class='page__toolbar toolbar'>
         <ul class='toolbar__list'>
           <li class='toolbar__item'>
-            <button class='btn' title='Edit'>
+            <a href='/admin/products/{{product.id}}/edit' class='btn' title='Edit'>
               <span class='material-icons'>edit</span>
-            </button>
-          </li>
-          <li class='toolbar__item'>
-            <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#deleteModal' title='Delete'
-              data-id={{product.id}}>
-              <span class='material-icons'>delete</span>
-            </button>
-          </li>
-          <li class='toolbar__item'>
-            <form action="/admin/products/{{product.id}}/restore" method='POST'>
-              <button name='restore' type="submit" class="btn" title='Restore'>
-                <span class='material-icons'>restore_from_trash</span>
-              </button>
-            </form>
+            </a>
           </li>
           <li class='toolbar__item'>
             <a id='close' href='/admin/products' class='btn' title='Close'>

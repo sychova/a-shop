@@ -1,102 +1,111 @@
 <html lang='en'>
 
-  <head>
-    {{>head}}
-    <title>Product detail</title>
-  </head>
+<head>
+  {{>head}}
+  <title>Product detail</title>
+</head>
 
-  <body>
-    <div class='wrapper'>
-      {{> admin/header}}
-      <main class='page'>
-        <section class='page__toolbar toolbar'>
-          <ul class='toolbar__list'>
-            <li class='toolbar__item'>
-              <button class='btn' title='Save'>
-                <span class='material-icons'>save</span>
-              </button>
-            </li>
-            <li class='toolbar__item'>
-              <button class='btn' title='Delete'>
-                <span class='material-icons'>delete</span>
-              </button>
-            </li>
-            <li class='toolbar__item'>
-              <button class='btn' title='Restore'>
+<body>
+  <div class='wrapper'>
+    {{> admin/header}}
+    <main class='page'>
+      <section class='page__toolbar toolbar'>
+        <ul class='toolbar__list'>
+          <li class='toolbar__item'>
+            <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#deleteModal'
+              data-id='{{product.id}}' title='Delete'>
+              <span class='material-icons'>delete</span>
+            </button>
+          </li>
+          <li class='toolbar__item'>
+            <form action="/admin/products/{{product.id}}/restore" method='POST'>
+              <button name='restore' type="submit" class="btn" title='Restore'>
                 <span class='material-icons'>restore_from_trash</span>
               </button>
-            </li>
-            <li class='toolbar__item'>
-              <button class='btn' title='Close'>
-                <span class='material-icons'>close</span>
-              </button>
-            </li>
-          </ul>
-        </section>
-        <section class='page__product-block product-block'>
-          <div class='product-block__container __container'>
-            <div class='product-info card'>
-              <div class='card-body product-info-body'>
-                <form>
-                  <div class='form-row'>
-                    <div class='col-md-6'>
-                      <div class='img-container'>
-                        <img src='/img/products/STRANDMON.png' />
-                      </div>
-                      <ul class='toolbar__list'>
-                        <li class='toolbar__item'>
-                          <button class='btn' title='Upload'>
-                            <span class='material-icons'>file_upload</span>
-                          </button>
-                        </li>
-                        <li class='toolbar__item'>
-                          <button class='btn' title='Delete'>
-                            <span class='material-icons'>delete</span>
-                          </button>
-                        </li>
-                      </ul>
+            </form>
+          </li>
+          <li class='toolbar__item'>
+            <a href='/admin/products' class='btn' title='Close'>
+              <span class='material-icons'>close</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class='page__product-block product-block'>
+        <div class='product-block__container __container'>
+          <div class='product-info card'>
+            <div class='card-body product-info-body'>
+              <form action='/admin/products/{{product.id}}/update' method='POST'>
+                <div class='form-row'>
+                  <div class='col-md-6'>
+                    <div>
+                      {{#if product.imagePath}}
+                        <img src='{{product.imagePath}}' class='img-container' alt='Product' />
+                      {{/if}}
+                      {{#unless product.imagePath}}
+                        <img src='/img/products/stub.png' alt='Product' class='img-container' />
+                      {{/unless}}
                     </div>
-                    <div class='col-md-6'>
-                      <div class='form-group'>
-                        <label for='productName'>Product name:</label>
-                        <input
-                          type='text'
-                          class='form-control'
-                          id='productName'
-                        />
-                      </div>
-                      <div class='form-group'>
-                        <label for='vendorCode'>Vendor code:</label>
-                        <input
-                          type='text'
-                          class='form-control'
-                          id='vendorCode'
-                        />
-                      </div>
-                      <div class='form-group'>
-                        <label for='productPrice'>Price $:</label>
-                        <input
-                          type='number'
-                          class='form-control'
-                          id='productPrice'
-                        />
-                      </div>
-                      <div class='form-group'>
-                        <label for='productDescription'>Description:</label>
-                        <textarea
-                          class='form-control'
-                          id='productDescription'
-                        ></textarea>
-                      </div>
-                    </div>
+                    <ul class='toolbar__list'>
+                      <li class='toolbar__item'>
+                        <button class='btn' title='Upload'>
+                          <span class='material-icons'>file_upload</span>
+                        </button>
+                      </li>
+                      <li class='toolbar__item'>
+                        <button class='btn' title='Delete'>
+                          <span class='material-icons'>delete</span>
+                        </button>
+                      </li>
+                    </ul>
                   </div>
-                </form>
-              </div>
+                  <div class='col-md-6'>
+                    <div class='form-group'>
+                      <label for='productName'>Product name:</label>
+                      <input type='text' class='form-control' id='productName' name='name' value='{{product.name}}' />
+                    </div>
+                    <div class='form-group'>
+                      <label for='vendorCode'>Vendor code:</label>
+                      <input type='text' class='form-control' id='vendorCode' name='vendorCode'
+                        value='{{product.vendorCode}}' />
+                    </div>
+                    <div class='form-group'>
+                      <label for='productPrice'>Price $:</label>
+                      <input type='number' class='form-control' id='productPrice' name='price'
+                        value='{{product.price}}' />
+                    </div>
+                    <div class='form-group'>
+                      <label for='productDescription'>Description:</label>
+                      <textarea class='form-control' id='productDescription'
+                        name='description'>{{product.description}}</textarea>
+                    </div>
+                    <div class='form-group'>
+                      <legend class='col-form-label'>Product status:</legend>
+                      <div class="form-check">
+                        {{#if product.deletedAt}}
+                          <input class="form-check-input" type="checkbox" name='isActive' value='active' id="status"
+                            unchecked>
+                        {{else}}
+                          <input class="form-check-input" type="checkbox" name='isActive' value='checked' id="status"
+                            checked>
+                        {{/if}}
+                        <label class="form-check-label" for="status">
+                          Active
+                        </label>
+                      </div>
+                    </div>
+                    <button type="submit" id='save' class='btn' title='Save'>Save</button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
-        </section>
-      </main>
-    </div>
-  </body>
+        </div>
+      </section>
+    </main>
+  </div>
+  {{> admin/modalDeleteSingle}}
+  {{>scripts}}
+</body>
 
 </html>

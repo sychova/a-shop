@@ -6,16 +6,10 @@ exports.up = async (knex) => {
     t.integer('price').notNullable().unsigned()
     t.text('description')
     t.string('image_path')
-    t.enu('product_status', ['active', 'deleted'], {
-      useNative: true,
-      enumName: 'product_status',
-    })
-      .notNullable()
-      .defaultTo('active')
+    t.timestamp('deletedAt', { useTz: false }).defaultTo(null)
   })
 }
 
 exports.down = async (knex) => {
   await knex.schema.dropTable('products')
-  await knex.raw('DROP TYPE product_status')
 }
