@@ -4,6 +4,7 @@ const {
   productFetcher,
   productDelete,
   productRestore,
+  productUpdate,
 } = require('../../services/products/admin/index')
 
 const productsList = async (req, res) => {
@@ -38,11 +39,24 @@ const create = async (req, res) => {
 }
 
 const edit = async (req, res) => {
-  res.render('./products/admin/edit')
+  try {
+    const { productId } = req.params
+    const product = await productFetcher.call(productId)
+    res.render('./products/admin/edit', { product })
+  } catch (error) {
+    console.error(error)
+    res.status(500).render('./errorAdmin', { error: error.message })
+  }
 }
 
 const update = async (req, res) => {
-  res.send('NOT IMPLEMENTED: Updating product')
+  try {
+    await productUpdate.call(req.params.productId, req.body)
+    res.redirect(`/admin/products/${req.params.productId}`)
+  } catch (error) {
+    console.error(error)
+    res.status(500).render('./errorAdmin', { error: error.message })
+  }
 }
 
 const deleteSingleProduct = async (req, res) => {

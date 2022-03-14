@@ -18,7 +18,7 @@ router.get('/admin/products/new', admin.products.newProduct)
 router.post('/admin/products', admin.products.create)
 router.get('/admin/products/:productId', admin.products.show)
 router.get('/admin/products/:productId/edit', admin.products.edit)
-router.put('/admin/products/:productId/update', admin.products.update)
+router.post('/admin/products/:productId/update', admin.products.update)
 router.post(
   '/admin/products/:productId/delete',
   admin.products.deleteSingleProduct,

@@ -65,6 +65,10 @@ li {
   color: var(--sky-blue) !important;
 }
 
+button span {
+  pointer-events: none;
+}
+
 /*----------------Header---------------------------------------------------------------*/
 
 .header {

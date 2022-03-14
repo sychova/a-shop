@@ -20,6 +20,10 @@ class Product extends BaseEntity {
   get imagePath() {
     return this.attr.imagePath
   }
+
+  get deletedAt() {
+    return this.attr.deletedAt
+  }
 }
 
 module.exports = Product
