@@ -1,4 +1,5 @@
 const { Router } = require('express')
+const { imageUpload } = require('../src/middlewares/imageUpload')
 const user = require('../src/controllers')
 const admin = require('../src/controllers/admin')
 
@@ -15,10 +16,18 @@ router.get('/admin', (req, res) => {
 })
 router.get('/admin/products', admin.products.productsList)
 router.get('/admin/products/new', admin.products.newProduct)
-router.post('/admin/products', admin.products.create)
+router.post(
+  '/admin/products',
+  imageUpload().single('image'),
+  admin.products.create,
+)
 router.get('/admin/products/:productId', admin.products.show)
 router.get('/admin/products/:productId/edit', admin.products.edit)
-router.post('/admin/products/:productId/update', admin.products.update)
+router.post(
+  '/admin/products/:productId/update',
+  imageUpload().single('image'),
+  admin.products.update,
+)
 router.post(
   '/admin/products/:productId/delete',
   admin.products.deleteSingleProduct,
