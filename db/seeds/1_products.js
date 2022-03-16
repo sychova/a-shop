@@ -36,14 +36,14 @@ exports.seed = (knex) => {
           vendorCode: 'VENDOR2',
           price: 200,
           description: 'A very comfortable table',
-          imagePath: '../../img/products/table.jpg',
+          imagePath: '/img/products/table.jpg',
         },
         {
           name: 'Sofa',
           vendorCode: 'VENDOR2',
           price: 300,
           description: 'A very comfortable sofa',
-          imagePath: '../../img/products/sofa.jpg',
+          imagePath: '/img/products/sofa.jpg',
         },
       ])
     })

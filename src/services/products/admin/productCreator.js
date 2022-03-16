@@ -1,23 +1,19 @@
 const BaseProduct = require('../baseProduct')
 
 class ProductCreator extends BaseProduct {
-  call(params) {
+  call(params, image) {
     try {
-      return this.createProduct(params)
+      return this.productRepo.create({
+        name: params.name,
+        vendorCode: params.vendorCode,
+        price: params.price,
+        description: params.description,
+        imagePath: image ? `/img/products/${image.filename}` : null,
+        deletedAt: params.isActive ? null : new Date(),
+      })
     } catch (error) {
       return { error: error.message || error }
     }
-  }
-
-  createProduct(params) {
-    return this.productRepo.create({
-      name: params.name,
-      vendorCode: params.vendorCode,
-      price: params.price,
-      description: params.description,
-      imagePath: params.imagePath,
-      deletedAt: params.isActive ? null : new Date(),
-    })
   }
 }
 

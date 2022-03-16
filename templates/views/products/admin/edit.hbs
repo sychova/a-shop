@@ -12,19 +12,6 @@
       <section class='page__toolbar toolbar'>
         <ul class='toolbar__list'>
           <li class='toolbar__item'>
-            <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#deleteModal'
-              data-id='{{product.id}}' title='Delete'>
-              <span class='material-icons'>delete</span>
-            </button>
-          </li>
-          <li class='toolbar__item'>
-            <form action="/admin/products/{{product.id}}/restore" method='POST'>
-              <button name='restore' type="submit" class="btn" title='Restore'>
-                <span class='material-icons'>restore_from_trash</span>
-              </button>
-            </form>
-          </li>
-          <li class='toolbar__item'>
             <a href='/admin/products' class='btn' title='Close'>
               <span class='material-icons'>close</span>
             </a>
@@ -35,12 +22,12 @@
         <div class='product-block__container __container'>
           <div class='product-info card'>
             <div class='card-body product-info-body'>
-              <form action='/admin/products/{{product.id}}/update' method='POST'>
+              <form action='/admin/products/{{product.id}}/update' enctype="multipart/form-data" method='POST'>
                 <div class='form-row'>
                   <div class='col-md-6'>
                     <div>
                       {{#if product.imagePath}}
-                        <img src='{{product.imagePath}}' class='img-container' alt='Product' />
+                        <img id='currentImage' src='{{product.imagePath}}' class='img-container' alt='Product' />
                       {{/if}}
                       {{#unless product.imagePath}}
                         <img src='/img/products/stub.png' alt='Product' class='img-container' />
@@ -48,14 +35,13 @@
                     </div>
                     <ul class='toolbar__list'>
                       <li class='toolbar__item'>
-                        <button class='btn' title='Upload'>
-                          <span class='material-icons'>file_upload</span>
-                        </button>
+                        <input id='image' type="file" name="image" accept="image/*" />
+                        <input id='imagePath' type="hidden" name="imagePath" value="{{product.imagePath}}">
                       </li>
                       <li class='toolbar__item'>
-                        <button class='btn' title='Delete'>
+                        <a id='imageDelete' class='btn' title='Delete'>
                           <span class='material-icons'>delete</span>
-                        </button>
+                        </a>
                       </li>
                     </ul>
                   </div>
@@ -106,6 +92,7 @@
   </div>
   {{> admin/modalDeleteSingle}}
   {{>scripts}}
+  <script src='/js/admin/edit.js'></script>
 </body>
 
 </html>

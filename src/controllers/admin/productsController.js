@@ -30,7 +30,7 @@ const newProduct = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    await productCreator.call(req.body)
+    await productCreator.call(req.body, req.file)
     await req.flash('info', 'Your product has successfully been created!')
     res.redirect('/admin/products')
   } catch (error) {
@@ -51,7 +51,7 @@ const edit = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    await productUpdate.call(req.params.productId, req.body)
+    await productUpdate.call(req.params.productId, req.body, req.file)
     res.redirect(`/admin/products/${req.params.productId}`)
   } catch (error) {
     console.error(error)

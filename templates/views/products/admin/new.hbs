@@ -24,7 +24,7 @@
         <div class='product-block__container __container'>
           <div class='product-info card'>
             <div class='card-body product-info-body'>
-              <form action='/admin/products' method='POST'>
+              <form action='/admin/products' enctype='multipart/form-data' method='POST'>
                 <div class='form-row'>
                   <div class='col-md-6'>
                     <div class='img-container'>
@@ -32,14 +32,12 @@
                     </div>
                     <ul class='toolbar__list'>
                       <li class='toolbar__item'>
-                        <button class='btn' title='Upload'>
-                          <span class='material-icons'>file_upload</span>
-                        </button>
+                        <input id='image' type="file" name="image" accept="image/*" />
                       </li>
                       <li class='toolbar__item'>
-                        <button class='btn' title='Delete'>
+                        <a id='imageDelete' class='btn' title='Delete'>
                           <span class='material-icons'>delete</span>
-                        </button>
+                        </a>
                       </li>
                     </ul>
                   </div>
@@ -80,7 +78,7 @@
     </main>
   </div>
   {{>scripts}}
-  <script src='/js/products.js'></script>
+  <script src='/js/admin/new.js'></script>
 </body>
 
 </html>
