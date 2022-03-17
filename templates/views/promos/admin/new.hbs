@@ -1,0 +1,49 @@
+<html lang='en'>
+
+<head>
+  {{>head}}
+  <title>Promo code</title>
+</head>
+
+<body>
+  <div class='wrapper'>
+    {{> admin/header}}
+    <main class='page'>
+      <section class='page__toolbar toolbar'>
+        <ul class='toolbar__list'>
+          <li class='toolbar__item'>
+            <a href='/admin/products' type='button' class='btn' data-toggle='tooltip' data-placement='bottom'
+              title='Cancel'>
+              <span class='material-icons'>close</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class='page__info-block info-block'>
+        <div class='info-block__container __container'>
+          <div class='order-info card'>
+            <h3 class='card-header'>Add Promo Code</h3>
+            <div class='card-body order-info-body'>
+              <form action='/admin/promos' method='POST'>
+                <div class='form-row'>
+                  <div class='form-group col-md-6'>
+                    <label for='codeName'>Code:</label>
+                    <input type='text' class='form-control' name='code' />
+                  </div>
+                  <div class='form-group col-md-6'>
+                    <label for='dicountAmount'>Discount amount (%):</label>
+                    <input type='number' class='form-control' name='value' />
+                  </div>
+                  <button type="submit" id='save' class='btn' title='Create'>Create new promo code</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  {{>scripts}}
+</body>
+
+</html>
