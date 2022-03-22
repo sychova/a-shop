@@ -8,7 +8,7 @@ class ProductCreator extends BaseProduct {
       price: params.price,
       description: params.description,
       imagePath: image ? `/img/products/${image.filename}` : null,
-      deletedAt: params.isActive ? null : new Date(),
+      deletedAt: params.isDeleted ? null : new Date(),
     })
   }
 }
