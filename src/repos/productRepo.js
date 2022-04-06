@@ -10,13 +10,18 @@ class ProductRepo extends BaseRepo {
     return 'products'
   }
 
-  allActive() {
-    return this.query.where({ productStatus: 'active' })
+  getActive() {
+    return this.query.whereNull('deletedAt')
+  }
+
+  receiveActiveByIds(ids) {
+    return this.query.whereIn('id', ids).whereNull('deletedAt')
   }
 
   async findActiveById(id) {
     const [record] = await this.query
-      .where({ id, productStatus: 'active' })
+      .where({ id })
+      .whereNull('deletedAt')
       .limit(1)
     return this.mapOrNotFound(record)
   }
@@ -25,7 +30,7 @@ class ProductRepo extends BaseRepo {
     const [record] = await this.query
       .whereIn('id', ids)
       .update({
-        productStatus: 'deleted',
+        deletedAt: new Date(),
       })
       .returning('*')
     return this.map(record)
@@ -35,7 +40,7 @@ class ProductRepo extends BaseRepo {
     const [record] = await this.query
       .whereIn('id', ids)
       .update({
-        productStatus: 'active',
+        deletedAt: null,
       })
       .returning('*')
     return this.map(record)

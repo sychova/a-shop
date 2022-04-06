@@ -4,7 +4,6 @@ const initMultiSelectors = () => {
   const productList = document.querySelectorAll('.singleSelect')
   const multProducts = document.querySelector('.multSelect')
   multProducts.addEventListener('click', () => {
-    console.log(multProducts.checked)
     productList.forEach((item) => {
       if (multProducts.checked) {
         item.checked = true

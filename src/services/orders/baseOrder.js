@@ -1,7 +1,7 @@
-class BaseOrdersFetcher {
+class BaseOrder {
   constructor({ orderRepo }) {
     this.orderRepo = orderRepo
   }
 }
 
-module.exports = BaseOrdersFetcher
+module.exports = BaseOrder

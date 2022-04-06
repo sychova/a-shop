@@ -110,30 +110,10 @@ const update = async (req, res) => {
   }
 }
 
-const deleteSingleProduct = async (req, res) => {
-  try {
-    await productDelete.call([req.params.productId])
-    res.redirect('/admin/products')
-  } catch (error) {
-    console.error(error)
-    res.status(500).render('./errorAdmin', { error: error.message })
-  }
-}
-
 const deleteMultipleProducts = async (req, res) => {
   try {
     await productDelete.call(req.body.ids)
     res.status(204).json()
-  } catch (error) {
-    console.error(error)
-    res.status(500).render('./errorAdmin', { error: error.message })
-  }
-}
-
-const restoreSingleProduct = async (req, res) => {
-  try {
-    await productRestore.call([req.params.productId])
-    res.redirect('/admin/products')
   } catch (error) {
     console.error(error)
     res.status(500).render('./errorAdmin', { error: error.message })
@@ -157,8 +137,6 @@ module.exports = {
   create,
   edit,
   update,
-  deleteSingleProduct,
   deleteMultipleProducts,
-  restoreSingleProduct,
   restoreMultipleProducts,
 }

@@ -12,12 +12,7 @@
       <section class='page__toolbar toolbar'>
         <ul class='toolbar__list'>
           <li class='toolbar__item'>
-            <button class='btn' title='View product'>
-              <span id='view' class='material-icons'>visibility</span>
-            </button>
-          </li>
-          <li class='toolbar__item'>
-            <button class='btn' title='Add product'>
+            <button id='addToCart' class='btn' title='Add product to Cart'>
               <span class='material-icons'>add_shopping_cart</span>
             </button>
           </li>
@@ -42,9 +37,9 @@
             </thead>
             <tbody>
               {{#each products}}
-                <tr data-id={{id}}>
+                <tr>
                   <th scope='row'>
-                    <input class='form-check-input singleSelect' type='checkbox' />
+                    <input class='form-check-input singleSelect' type='checkbox' data-id={{id}} />
                   </th>
                   <td>
                     {{#if imagePath}}
