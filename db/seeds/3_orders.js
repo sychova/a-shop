@@ -4,14 +4,12 @@ exports.seed = (knex) => {
     .then(() => {
       return knex('orders').insert([
         {
-          id: 1,
           customerName: 'Kathryn Janeway',
           customerEmail: 'kathryn.janeway@example.com',
           totalPrice: 30,
           deliveryMethod: 'self',
         },
         {
-          id: 2,
           customerName: 'Kathryn Janeway',
           customerEmail: 'k.janeway@example.com',
           totalPrice: 600,

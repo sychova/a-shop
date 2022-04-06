@@ -9,6 +9,11 @@ class PromoRepo extends BaseRepo {
   static get table() {
     return 'promos'
   }
+
+  async tryFindByCode(code) {
+    const [record] = await this.query.where({ code }).limit(1)
+    return this.mapOrNull(record)
+  }
 }
 
 module.exports = PromoRepo

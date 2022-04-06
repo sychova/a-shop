@@ -11,8 +11,10 @@
       </ul>
     </nav>
     <div class='__cart'>
-      <span class='cart__items'>12</span>
-      <a href='#'>
+      {{#if cartCount}}
+        <span class='cart__items'>{{cartCount}}</span>
+      {{/if}}
+      <a href='/orders/new/cart'>
         <span class='material-icons'>shopping_cart</span>
       </a>
     </div>

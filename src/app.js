@@ -4,6 +4,7 @@ const path = require('path')
 const { flash } = require('express-flash-message')
 const hbs = require('hbs')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const router = require('../config/router')
 
 const app = express()
@@ -21,6 +22,7 @@ app.use(
 app.use(flash({ sessionKeyName: 'flashMessage' }))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/api', bodyParser.json())
+app.use(cookieParser())
 app.use(router)
 
 const publicDirPath = path.join(__dirname, '../public')

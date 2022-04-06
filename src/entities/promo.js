@@ -1,6 +1,6 @@
 const BaseEntity = require('./base')
 
-class Product extends BaseEntity {
+class Promo extends BaseEntity {
   get code() {
     return this.attr.code
   }
@@ -10,4 +10,4 @@ class Product extends BaseEntity {
   }
 }
 
-module.exports = Product
+module.exports = Promo

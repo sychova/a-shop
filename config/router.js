@@ -11,6 +11,8 @@ router.get('/', (req, res) => {
 })
 router.get('/products', user.products.productsList)
 router.get('/products/:productId', user.products.show)
+router.get('/products/:productId/add', user.products.addSingleProduct)
+router.post('/api/products/add', user.products.addMultipleProducts)
 
 router.get('/admin', (req, res) => {
   res.redirect('/admin/products')
@@ -25,22 +27,17 @@ router.post(
   singleImageUpload,
   admin.products.update,
 )
-router.post(
-  '/admin/products/:productId/delete',
-  admin.products.deleteSingleProduct,
-)
 router.delete('/api/admin/products', admin.products.deleteMultipleProducts)
-router.post(
-  '/admin/products/:productId/restore',
-  admin.products.restoreSingleProduct,
-)
 router.post(
   '/api/admin/products/restore',
   admin.products.restoreMultipleProducts,
 )
 
 router.get('/orders/new/cart', user.orders.cart)
+router.post('/api/orders/new/cart/update', user.orders.cartUpdate)
+router.delete('/api/orders/new/cart/delete', user.orders.deleteFromCart)
 router.get('/orders/new/checkout', user.orders.checkout)
+router.post('/orders/promo', user.promos.checkAvailability)
 router.post('/orders', user.orders.create)
 
 router.get('/admin/orders', admin.orders.ordersList)
