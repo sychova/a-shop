@@ -7,14 +7,14 @@
 
   <body>
     <div class='wrapper'>
-      {{> admin/header}}
+      {{>admin/header}}
       <main class='page'>
         <section class='page__toolbar toolbar'>
           <ul class='toolbar__list'>
             <li class='toolbar__item'>
-              <button class='btn' title='Back'>
+              <a href='/admin/orders' class='btn' title='Back'>
                 <span class='material-icons'>arrow_back</span>
-              </button>
+              </a>
             </li>
           </ul>
         </section>
@@ -26,23 +26,32 @@
                 <div class='basic-info'>
                   <div>
                     <span class='card-body__title card__title'>Order №:</span>
-                    <p class='card-body__value card__value'>333</p>
+                    <p class='card-body__value card__value'>{{order.id}}</p>
                     <span class='card-body__title card__title'>Customer name:</span>
-                    <p class='card-body__value card__value'>Anastasiya Sychova</p>
+                    <p
+                      class='card-body__value card__value'
+                    >{{order.customerName}}</p>
                   </div>
                   <div>
                     <span class='card-body__title card__title'>Total price:</span>
-                    <p class='price card-body__value card__value'>2190</p>
+                    <p
+                      class='price card-body__value card__value'
+                    >{{order.totalPrice}}</p>
                     <span class='card-body__title card__title'>Customer email:</span>
                     <p
                       class='card-body__value card__value'
-                    >anastasiya.sychova@example.com</p>
+                    >{{order.customerEmail}}</p>
                   </div>
                 </div>
                 <div>
                   <span class='card-body__title card__title'>Delivery method:</span>
-                  <p class='card-body__value card__value'>1600 Amphitheatre
-                    Parkway Mountain View, CA 94043, USA</p>
+                  {{#if order.deliveryAddress}}
+                    <p
+                      class='card-body__value card__value'
+                    >{{order.deliveryAddress}}</p>
+                  {{else}}
+                    <p class='card-body__value card__value'>Self-pickup</p>
+                  {{/if}}
                 </div>
               </div>
             </div>
@@ -64,20 +73,15 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class='col-pink'>STRANDMON</td>
-                      <td class='col-pantone_purple'>Ikea</td>
-                      <td class='col-off_blue'>10</td>
-                      <td class='price col-off_blue'>179</td>
-                      <td class='price col-off_blue'>1790</td>
-                    </tr>
-                    <tr>
-                      <td class='col-pink'>NOLMYRA</td>
-                      <td class='col-pantone_purple'>Ikea</td>
-                      <td class='col-off_blue'>10</td>
-                      <td class='price col-off_blue'>40</td>
-                      <td class='price col-off_blue'>400</td>
-                    </tr>
+                    {{#each products}}
+                      <tr>
+                        <td class='col-pink'>{{name}}</td>
+                        <td class='col-pantone_purple'>{{vendorCode}}</td>
+                        <td class='col-off_blue'>{{amount}}</td>
+                        <td class='price col-off_blue'>{{price}}</td>
+                        <td class='price col-off_blue'>{{priceTotal}}</td>
+                      </tr>
+                    {{/each}}
                   </tbody>
                 </table>
               </div>

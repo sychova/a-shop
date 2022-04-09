@@ -1,6 +1,7 @@
 class BaseOrder {
-  constructor({ orderRepo }) {
+  constructor({ orderRepo, orderProductRepo }) {
     this.orderRepo = orderRepo
+    this.orderProductRepo = orderProductRepo
   }
 }
 

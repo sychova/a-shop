@@ -1,136 +1,204 @@
 <html lang='en'>
 
-<head>
-  {{>head}}
-  <title>Cart</title>
-</head>
+  <head>
+    {{>head}}
+    <title>Checkout</title>
+  </head>
 
-<body>
-  <div class='wrapper'>
-    {{>header}}
-    <section class='page__toolbar toolbar'>
-      <ul class='toolbar__list'>
-        <li class='toolbar__item'>
-          <a href='/orders/new/cart' type='button' class='btn' data-toggle='tooltip' data-placement='bottom'
-            title='Back'>
-            <span class='material-icons'>arrow_back</span>
-          </a>
-        </li>
-        <li class='toolbar__item'>
-          <button type='submit' form='order' class='btn' data-toggle='tooltip' data-placement='bottom' title='Submit'>
-            <span class='material-icons'>check_circle_outline</span>
-          </button>
-        </li>
-      </ul>
-    </section>
-    {{>toastError}}
-    <form id='order' action='/orders' method='POST'>
-      <section class='page__info-block info-block'>
-        <div class='info-block__container __container'>
-          <div class='order-info card'>
-            <h3 class='card-header'>Order info</h3>
-            <div class='card-body order-info-body'>
-              <div class='form-row'>
-                <div class='form-group col-md-6'>
-                  <label for='customerName'>Customer name:</label>
-                  <input type='text' class='form-control' id='customerName' name='customerName' />
-                </div>
-                <div class='form-group col-md-6'>
-                  <label for='customerEmail'>Customer email:</label>
-                  <input type='email' class='form-control' id='customerEmail' name='customerEmail' />
+  <body>
+    <div class='wrapper'>
+      {{>header}}
+      <main class='page'>
+        <section class='page__toolbar toolbar'>
+          <ul class='toolbar__list'>
+            <li class='toolbar__item'>
+              <a
+                href='/orders/new/cart'
+                type='button'
+                class='btn'
+                data-toggle='tooltip'
+                data-placement='bottom'
+                title='Back'
+              >
+                <span class='material-icons'>arrow_back</span>
+              </a>
+            </li>
+            <li class='toolbar__item'>
+              <button
+                type='submit'
+                form='order'
+                class='btn'
+                data-toggle='tooltip'
+                data-placement='bottom'
+                title='Submit'
+              >
+                <span class='material-icons'>check_circle_outline</span>
+              </button>
+            </li>
+          </ul>
+        </section>
+        {{>toastError}}
+        <form id='order' action='/orders' method='POST'>
+          <section class='page__info-block info-block'>
+            <div class='info-block__container __container'>
+              <div class='order-info card'>
+                <h3 class='card-header'>Order info</h3>
+                <div class='card-body order-info-body'>
+                  <div class='form-row'>
+                    <div class='form-group col-md-6'>
+                      <label for='customerName'>Customer name:</label>
+                      <input
+                        type='text'
+                        class='form-control'
+                        id='customerName'
+                        name='customerName'
+                      />
+                    </div>
+                    <div class='form-group col-md-6'>
+                      <label for='customerEmail'>Customer email:</label>
+                      <input
+                        type='email'
+                        class='form-control'
+                        id='customerEmail'
+                        name='customerEmail'
+                      />
+                    </div>
+                  </div>
+                  <div class='form-row'>
+                    <legend class='col-form-label col-sm-2 pt-0'>Delivery
+                      method:</legend>
+                    <div class='form-check form-check-inline'>
+                      <input
+                        class='form-check-input'
+                        type='radio'
+                        name='deliveryMethod'
+                        id='self'
+                        value='self'
+                        checked
+                      />
+                      <label
+                        class='form-check-label'
+                        for='self'
+                      >Self-pickup</label>
+                    </div>
+                    <div class='form-check form-check-inline'>
+                      <input
+                        class='form-check-input'
+                        type='radio'
+                        name='deliveryMethod'
+                        id='address'
+                        value='address'
+                      />
+                      <label class='form-check-label' for='address'>Delivery
+                        address</label>
+                    </div>
+                  </div>
+                  <div class='form-group'>
+                    <input
+                      type='text'
+                      class='form-control'
+                      id='deliveryAddress'
+                      name='deliveryAddress'
+                      disabled
+                      placeholder='1234 Main St'
+                    />
+                  </div>
+                  <input
+                    type='hidden'
+                    class='form-control'
+                    id='promoId'
+                    name='promoId'
+                    value={{promo.id}}
+                  />
+                  <input
+                    type='hidden'
+                    class='form-control'
+                    id='value'
+                    name='value'
+                    value={{promo.value}}
+                  />
                 </div>
               </div>
-              <div class='form-row'>
-                <legend class='col-form-label col-sm-2 pt-0'>Delivery
-                  method:</legend>
-                <div class='form-check form-check-inline'>
-                  <input class='form-check-input' type='radio' name='deliveryMethod' id='self' value='self' checked />
-                  <label class='form-check-label' for='self'>Self-pickup</label>
-                </div>
-                <div class='form-check form-check-inline'>
-                  <input class='form-check-input' type='radio' name='deliveryMethod' id='address' value='address' />
-                  <label class='form-check-label' for='address'>Delivery address</label>
-                </div>
+            </div>
+          </section>
+        </form>
+        <section>
+          <div class='promo-block__container __container'>
+            <div class='promo-info card'>
+              <h3 class='card-header'>Promo code</h3>
+              <div class='card-body order-promo-body'>
+                <form id='promo' action='/orders/promo' method='POST'>
+                  <div class='form-row'>
+                    <div class='form-group col-md-6'>
+                      <label for='codeValue'>Promo code:</label>
+                      <input
+                        type='text'
+                        class='form-control'
+                        id='codeValue'
+                        name='codeValue'
+                      />
+                      {{#if success}}
+                        <span class='text-success'>{{success}}</span>
+                      {{/if}}
+                      {{#if promoError}}
+                        <span class='text-danger'>{{promoError}}</span>
+                      {{/if}}
+                    </div>
+                    <div class='form-group col-md-6'>
+                      <button
+                        type='submit'
+                        form='promo'
+                        class='btn'
+                      >Apply</button>
+                    </div>
+                  </div>
+                </form>
               </div>
-              <div class='form-group'>
-                <input type='text' class='form-control' id='deliveryAddress' name='deliveryAddress' disabled
-                  placeholder='1234 Main St' />
-              </div>
-              <input type='hidden' class='form-control' id='promoId' name='promoId' value={{promo.id}} />
-              <input type='hidden' class='form-control' id='value' name='value' value={{promo.value}} />
             </div>
           </div>
-        </div>
-      </section>
-    </form>
-    <section>
-      <div class='promo-block__container __container'>
-        <div class='promo-info card'>
-          <h3 class='card-header'>Promo code</h3>
-          <div class='card-body order-promo-body'>
-            <form id='promo' action='/orders/promo' method='POST'>
-              <div class='form-row'>
-                <div class='form-group col-md-6'>
-                  <label for='codeValue'>Promo code:</label>
-                  <input type='text' class='form-control' id='codeValue' name='codeValue' />
+        </section>
+        <section class='page__info-block cart-block'>
+          <div class='cart-block__container __container'>
+            <div class='cart-info card'>
+              <h3 class='card-header'>Cart info</h3>
+              <div class='card-body'>
+                <h5 class='card-title'>Your current total is
                   {{#if success}}
-                    <span class='text-success'>{{success}}</span>
+                    <span class='price text-warning'>{{cartTotal}}</span>
+                  {{else}}
+                    <span class='price'>{{cartTotal}}</span>
                   {{/if}}
-                  {{#if promoError}}
-                    <span class='text-danger'>{{promoError}}</span>
-                  {{/if}}
-                </div>
-                <div class='form-group col-md-6'>
-                  <button type='submit' form='promo' class='btn'>Apply</button>
-                </div>
+                </h5>
+                <table class='table'>
+                  <thead>
+                    <tr>
+                      <th scope='col'>Product name</th>
+                      <th scope='col'>Vendor code</th>
+                      <th scope='col'>Amount</th>
+                      <th scope='col'>Price per unit</th>
+                      <th scope='col'>Total price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each products}}
+                      <tr>
+                        <td class='col-pink'>{{name}}</td>
+                        <td class='col-pantone_purple'>{{vendorCode}}</td>
+                        <td class='col-off_blue'>{{amount}}</td>
+                        <td class='price col-off_blue'>{{price}}</td>
+                        <td class='price col-off_blue'>{{amountTotal}}</td>
+                      </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
-    <section class='page__info-block cart-block'>
-      <div class='cart-block__container __container'>
-        <div class='cart-info card'>
-          <h3 class='card-header'>Cart info</h3>
-          <div class='card-body'>
-            <h5 class='card-title'>Your current total is
-              {{#if success}}
-                <span class='price text-warning'>{{cartTotal}}</span>
-              {{else}}
-                <span class='price'>{{cartTotal}}</span>
-              {{/if}}
-            </h5>
-            <table class='table'>
-              <thead>
-                <tr>
-                  <th scope='col'>Product name</th>
-                  <th scope='col'>Vendor code</th>
-                  <th scope='col'>Amount</th>
-                  <th scope='col'>Price per unit</th>
-                  <th scope='col'>Total price</th>
-                </tr>
-              </thead>
-              <tbody>
-                {{#each products}}
-                  <tr>
-                    <td class='col-pink'>{{name}}</td>
-                    <td class='col-pantone_purple'>{{vendorCode}}</td>
-                    <td class='col-off_blue'>{{amount}}</td>
-                    <td class='price col-off_blue'>{{price}}</td>
-                    <td class='price col-off_blue'>{{amountTotal}}</td>
-                  </tr>
-                {{/each}}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
-    </main>
-  </div>
-  {{>scripts}}
-  <script src='/js/checkout.js'></script>
-</body>
+        </section>
+      </main>
+    </div>
+    {{>scripts}}
+    <script src='/js/checkout.js'></script>
+  </body>
 
 </html>

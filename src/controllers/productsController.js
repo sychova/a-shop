@@ -9,7 +9,7 @@ const productsList = async (req, res) => {
   const products = await productsFetcher.call()
   let cartCount
   if (req.cookies.cart) {
-    const currentCart = JSON.parse(req.cookies.cart)
+    const currentCart = req.cookies.cart && JSON.parse(req.cookies.cart)
     const { updatedCart } = await productsInCartUpdateService.call(currentCart)
     if (updatedCart) {
       cartCount = updatedCart.length
@@ -24,9 +24,7 @@ const productsList = async (req, res) => {
 
 const show = async (req, res) => {
   try {
-    const cartCount = req.cookies.cart
-      ? JSON.parse(req.cookies.cart).length
-      : null
+    const cartCount = req.cookies.cart && JSON.parse(req.cookies.cart).length
     const { productId } = req.params
     const product = await productFetcher.call(productId)
     res.render('./products/show', { product, cartCount })
@@ -38,7 +36,7 @@ const show = async (req, res) => {
 
 const addSingleProduct = async (req, res) => {
   try {
-    const currentCart = req.cookies.cart ? JSON.parse(req.cookies.cart) : null
+    const currentCart = req.cookies.cart && JSON.parse(req.cookies.cart)
     const products = await ProductsToCart.addToCart(
       [req.params.productId],
       currentCart,
@@ -54,7 +52,7 @@ const addSingleProduct = async (req, res) => {
 
 const addMultipleProducts = async (req, res) => {
   try {
-    const currentCart = JSON.parse(req.cookies.cart)
+    const currentCart = req.cookies.cart && JSON.parse(req.cookies.cart)
     const products = await ProductsToCart.addToCart(req.body.ids, currentCart)
     res.clearCookie('cart')
     res.cookie('cart', JSON.stringify(products))
