@@ -10,5 +10,6 @@ module.exports = {
   productFetcher: new ProductFetcher({ productRepo }),
   ProductsToCart,
   productsInCartUpdateService: new ProductsInCartUpdateService({ productRepo }),
+  ProductsInCartUpdateService,
   ProductsFromCartDeleteService,
 }

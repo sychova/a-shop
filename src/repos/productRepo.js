@@ -10,12 +10,14 @@ class ProductRepo extends BaseRepo {
     return 'products'
   }
 
-  getActive() {
-    return this.query.whereNull('deletedAt')
+  async getActive() {
+    const records = await this.query.whereNull('deletedAt')
+    return this.map(records)
   }
 
-  receiveActiveByIds(ids) {
-    return this.query.whereIn('id', ids).whereNull('deletedAt')
+  async receiveActiveByIds(ids) {
+    const records = await this.query.whereIn('id', ids).whereNull('deletedAt')
+    return this.map(records)
   }
 
   async findActiveById(id) {

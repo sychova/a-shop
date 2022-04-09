@@ -10,6 +10,11 @@ const AVAILABILITY_WARNING =
 
 const cart = async (req, res) => {
   try {
+    if (!req.cookies.cart) {
+      res.render('./orders/cartEmpty')
+      return
+    }
+
     const currentCart = JSON.parse(req.cookies.cart)
     const { products, updatedCart } = await productsInCartUpdateService.call(
       currentCart,
@@ -18,9 +23,12 @@ const cart = async (req, res) => {
     const error = []
     if (updatedCart) {
       error.push(AVAILABILITY_WARNING)
-      cartCount = updatedCart.length
+      if (updatedCart.length !== 0) {
+        cartCount = updatedCart.length
+        res.clearCookie('cart')
+        res.cookie('cart', JSON.stringify(updatedCart))
+      }
       res.clearCookie('cart')
-      res.cookie('cart', JSON.stringify(updatedCart))
     } else {
       cartCount = currentCart.length
     }
@@ -34,6 +42,11 @@ const cart = async (req, res) => {
 
 const cartUpdate = async (req, res) => {
   try {
+    if (!req.cookies.cart) {
+      res.render('./orders/cartEmpty')
+      return
+    }
+
     const currentCart = JSON.parse(req.cookies.cart)
     let products
     if (req.body.amount <= 0) {
@@ -53,8 +66,12 @@ const cartUpdate = async (req, res) => {
       )
     }
 
-    res.clearCookie('cart')
-    res.cookie('cart', JSON.stringify(products))
+    if (products.length === 0) {
+      res.clearCookie('cart')
+    } else {
+      res.clearCookie('cart')
+      res.cookie('cart', JSON.stringify(products))
+    }
     res.sendStatus(204)
   } catch (error) {
     console.error(error)
@@ -70,13 +87,24 @@ const deleteFromCart = async (req, res) => {
       id: req.body.id,
     },
   )
-  res.clearCookie('cart')
-  res.cookie('cart', JSON.stringify(products))
+
+  if (products.length === 0) {
+    res.clearCookie('cart')
+  } else {
+    res.clearCookie('cart')
+    res.cookie('cart', JSON.stringify(products))
+  }
+
   res.sendStatus(204)
 }
 
 const checkout = async (req, res) => {
   try {
+    if (!req.cookies.cart) {
+      res.render('./orders/cartEmpty')
+      return
+    }
+
     const currentCart = JSON.parse(req.cookies.cart)
     const success = await req.consumeFlash('success')
     const promoError = await req.consumeFlash('promoError')
@@ -88,9 +116,12 @@ const checkout = async (req, res) => {
 
     if (updatedCart) {
       error.push(AVAILABILITY_WARNING)
-      cartCount = updatedCart.length
+      if (updatedCart.length !== 0) {
+        cartCount = updatedCart.length
+        res.clearCookie('cart')
+        res.cookie('cart', JSON.stringify(updatedCart))
+      }
       res.clearCookie('cart')
-      res.cookie('cart', JSON.stringify(updatedCart))
     } else {
       cartCount = currentCart.length
     }

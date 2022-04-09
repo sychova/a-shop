@@ -1,76 +1,94 @@
 <html lang='en'>
 
-<head>
-  {{>head}}
-  <title>Cart</title>
-</head>
+  <head>
+    {{>head}}
+    <title>Cart</title>
+  </head>
 
-<body>
-  <div class='wrapper'>
-    {{>header}}
-    <main class='page'>
-      <section class='page__toolbar toolbar'>
-        <ul class='toolbar__list'>
-          <li class='toolbar__item'>
-            <a href='/orders/new/checkout' class='btn' title='Checkout'>
-              <span class='material-icons'>shopping_cart_checkout</span>
-            </a>
-          </li>
-        </ul>
-      </section>
-      {{>toastError}}
-      <section class='page__info-block info-block'>
-        <div class='info-block__container __container'>
-          <div class='cart-info card'>
-            <h3 class='card-header'>Cart info</h3>
-            <div class='card-body'>
-              <table class='table'>
-                <thead>
-                  <tr>
-                    <th scope='col'>Image</th>
-                    <th scope='col'>Product name</th>
-                    <th scope='col'>Vendor code</th>
-                    <th scope='col'>Price</th>
-                    <th scope='col'>Amount</th>
-                    <th scope='col'></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {{#each products}}
+  <body>
+    <div class='wrapper'>
+      {{>header}}
+      <main class='page'>
+        <section class='page__toolbar toolbar'>
+          <ul class='toolbar__list'>
+            <li class='toolbar__item'>
+              <a href='/orders/new/checkout' class='btn' title='Checkout'>
+                <span class='material-icons'>shopping_cart_checkout</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+        {{>toastError}}
+        <section class='page__info-block info-block'>
+          <div class='info-block__container __container'>
+            <div class='cart-info card'>
+              <h3 class='card-header'>Cart info</h3>
+              <div class='card-body'>
+                <table class='table'>
+                  <thead>
                     <tr>
-                      <td>
-                        {{#if imagePath}}
-                          <img src='{{imagePath}}' alt='Product' class='img-thumbnail' />
-                        {{else}}
-                          <img src='/img/products/stub.png' alt='Product' class='img-thumbnail' />
-                        {{/if}}
-                      </td>
-                      <td class='col-pink'>{{name}}</td>
-                      <td class='col-pantone_purple'>{{vendorCode}}</td>
-                      <td class='price col-off_blue'>{{price}}</td>
-                      <td>
-                        <div class='amount_setting btn-group' role='group'>
-                          <button class='amountDecrease'>-</button>
-                          <input class='amountEdit' type='number' min='0' max='100' value='{{amount}}'
-                            data-id='{{id}}' />
-                          <button class='amountIncrease'>+</button>
-                        </div>
-                      </td>
-                      <td>
-                        <button type='button' class='delete btn btn-danger' data-id='{{id}}'>Remove</button>
-                      </td>
+                      <th scope='col'>Image</th>
+                      <th scope='col'>Product name</th>
+                      <th scope='col'>Vendor code</th>
+                      <th scope='col'>Price</th>
+                      <th scope='col'>Amount</th>
+                      <th scope='col'></th>
                     </tr>
-                  {{/each}}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {{#each products}}
+                      <tr>
+                        <td>
+                          {{#if imagePath}}
+                            <img
+                              src='{{imagePath}}'
+                              alt='Product'
+                              class='img-thumbnail'
+                            />
+                          {{else}}
+                            <img
+                              src='/img/products/stub.png'
+                              alt='Product'
+                              class='img-thumbnail'
+                            />
+                          {{/if}}
+                        </td>
+                        <td class='col-pink'>{{name}}</td>
+                        <td class='col-pantone_purple'>{{vendorCode}}</td>
+                        <td class='price col-off_blue'>{{price}}</td>
+                        <td>
+                          <div class='amount_setting btn-group' role='group'>
+                            <button class='amountDecrease'>-</button>
+                            <input
+                              class='amountEdit'
+                              type='number'
+                              min='0'
+                              max='100'
+                              value='{{amount}}'
+                              data-id='{{id}}'
+                            />
+                            <button class='amountIncrease'>+</button>
+                          </div>
+                        </td>
+                        <td>
+                          <button
+                            type='button'
+                            class='delete btn btn-danger'
+                            data-id='{{id}}'
+                          >Remove</button>
+                        </td>
+                      </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </main>
-  </div>
-  {{>scripts}}
-  <script src='/js/cart.js'></script>
-</body>
+        </section>
+      </main>
+    </div>
+    {{>scripts}}
+    <script src='/js/cart.js'></script>
+  </body>
 
 </html>

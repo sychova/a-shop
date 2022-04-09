@@ -4,8 +4,15 @@
       <thead>
         <tr>
           <th scope='col'>
-            <input class='form-check-input multSelect' type='checkbox' title='Select all' />
-            <label class='form-check-label' for='flexCheckDefault'>Select</label>
+            <input
+              class='form-check-input multSelect'
+              type='checkbox'
+              title='Select all'
+            />
+            <label
+              class='form-check-label'
+              for='flexCheckDefault'
+            >Select</label>
           </th>
           <th scope='col'>Image</th>
           <th scope='col'>Product name</th>
@@ -21,10 +28,18 @@
             </th>
             <td>
               {{#if imagePath}}
-                <img src='{{imagePath}}' alt='Product' class='img-thumbnail productLink'
-                  title='Click for more details' />
+                <img
+                  src='{{imagePath}}'
+                  alt='Product'
+                  class='img-thumbnail productLink'
+                  title='Click for more details'
+                />
               {{else}}
-                <img src='../../img/products/stub.png' alt='Product' class='img-thumbnail' />
+                <img
+                  src='../../img/products/stub.png'
+                  alt='Product'
+                  class='img-thumbnail'
+                />
               {{/if}}
             </td>
             <td class='col-pink'>{{name}}</td>

@@ -1,87 +1,124 @@
 <html lang='en'>
 
-<head>
-  {{>head}}
-  <title>Products</title>
-</head>
+  <head>
+    {{>head}}
+    <title>Products</title>
+  </head>
 
-<body>
-  <div class='wrapper'>
-    {{> admin/header}}
-    <main class='page'>
-      <section class='page__toolbar toolbar'>
-        <ul class='toolbar__list'>
-          <li class='toolbar__item'>
-            <a id='add' href='/admin/products/new' class='btn' title='Add product'>
-              <span class='material-icons'>note_add</span>
-            </a>
-          </li>
-          <li class='toolbar__item'>
-            <button type='button' class="btn btn-primary" data-toggle="modal" data-target="#deleteModal"
-              title='Delete product'>
-              <span class='material-icons'>delete</span>
-            </button>
-          </li>
-          <li class='toolbar__item'>
-            <button id='restore' class='btn' title='Restore product'>
-              <span class='material-icons'>restore_from_trash</span>
-            </button>
-          </li>
-        </ul>
-      </section>
-      {{>pagination}}
-      {{>toast}}
-      <section class='page__table'>
-        <div class='table__container __container'>
-          <table class='table table-hover'>
-            <thead>
-              <tr>
-                <th scope='col'>
-                  <input class='form-check-input multSelect' type='checkbox' title='Select all' />
-                  <label class='form-check-label' for='flexCheckDefault'>Select</label>
-                </th>
-                <th scope='col'>Image</th>
-                <th scope='col'>Product name</th>
-                <th scope='col'>Vendor code</th>
-                <th scope='col'>Price</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each products}}
+  <body>
+    <div class='wrapper'>
+      {{>admin/header}}
+      <main class='page'>
+        <section class='page__toolbar toolbar'>
+          <ul class='toolbar__list'>
+            <li class='toolbar__item'>
+              <a
+                id='add'
+                href='/admin/products/new'
+                class='btn'
+                title='Add product'
+              >
+                <span class='material-icons'>note_add</span>
+              </a>
+            </li>
+            <li class='toolbar__item'>
+              <button
+                type='button'
+                class='btn btn-primary'
+                data-toggle='modal'
+                data-target='#deleteModal'
+                title='Delete product'
+              >
+                <span class='material-icons'>delete</span>
+              </button>
+            </li>
+            <li class='toolbar__item'>
+              <button id='restore' class='btn' title='Restore product'>
+                <span class='material-icons'>restore_from_trash</span>
+              </button>
+            </li>
+          </ul>
+        </section>
+        {{>pagination}}
+        {{>toast}}
+        <section class='page__table'>
+          <div class='table__container __container'>
+            <table class='table table-hover'>
+              <thead>
                 <tr>
-                  <th scope='row'>
-                    <input class='form-check-input singleSelect' type='checkbox' data-id={{id}} />
+                  <th scope='col'>
+                    <input
+                      class='form-check-input multSelect'
+                      type='checkbox'
+                      title='Select all'
+                    />
+                    <label
+                      class='form-check-label'
+                      for='flexCheckDefault'
+                    >Select</label>
                   </th>
-                  <td>
-                    {{#if imagePath}}
-                      <img src='{{imagePath}}' alt='Product' class='img-thumbnail' />
-                    {{else}}
-                      <img src='/img/products/stub.png' alt='Product' class='img-thumbnail' />
-                    {{/if}}
-                  </td>
-                  <td class='col-pink'>{{name}}</td>
-                  <td class='col-pantone_purple'>{{vendorCode}}</td>
-                  <td class='price col-off_blue'>{{price}}</td>
-                  <td>
-                    <a href='/admin/products/{{id}}' class='btn' title='View'>
-                      <span class='material-icons'>visibility</span>
-                    </a>
-                    <a href='/admin/products/{{id}}/edit' class='btn' title='Edit'>
-                      <span class='material-icons'>edit</span>
-                    </a>
-                  </td>
+                  <th scope='col'>Image</th>
+                  <th scope='col'>Product name</th>
+                  <th scope='col'>Vendor code</th>
+                  <th scope='col'>Price</th>
+                  <th></th>
                 </tr>
-              {{/each}}
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </main>
-  </div>
-  {{>admin/modalDeleteMulti}}
-  {{>scripts}}
-  <script src='/js/admin/products.js'></script>
-</body>
+              </thead>
+              <tbody>
+                {{#each products}}
+                  <tr>
+                    <th scope='row'>
+                      <input
+                        class='form-check-input singleSelect'
+                        type='checkbox'
+                        data-id={{id}}
+                      />
+                    </th>
+                    <td>
+                      {{#if imagePath}}
+                        <img
+                          src='{{imagePath}}'
+                          alt='Product'
+                          class='img-thumbnail'
+                        />
+                      {{else}}
+                        <img
+                          src='/img/products/stub.png'
+                          alt='Product'
+                          class='img-thumbnail'
+                        />
+                      {{/if}}
+                    </td>
+                    <td class='col-pink'>{{name}}</td>
+                    <td class='col-pantone_purple'>{{vendorCode}}</td>
+                    {{#if deletedAt}}
+                      <td class='col-off_blue'>Not available</td>
+                    {{else}}
+                      <td class='price col-off_blue'>{{price}}</td>
+                    {{/if}}
+                    <td>
+                      <a href='/admin/products/{{id}}' class='btn' title='View'>
+                        <span class='material-icons'>visibility</span>
+                      </a>
+                      <a
+                        href='/admin/products/{{id}}/edit'
+                        class='btn'
+                        title='Edit'
+                      >
+                        <span class='material-icons'>edit</span>
+                      </a>
+                    </td>
+                  </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    {{>admin/modalDeleteMulti}}
+    {{>scripts}}
+    <script src='/js/admin/products.js'></script>
+  </body>
 
 </html>
