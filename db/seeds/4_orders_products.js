@@ -27,6 +27,36 @@ exports.seed = (knex) => {
           price: 300,
           amount: 1,
         },
+        {
+          orderId: 3,
+          productId: 1,
+          price: 10,
+          amount: 1,
+        },
+        {
+          orderId: 4,
+          productId: 1,
+          price: 10,
+          amount: 1,
+        },
+        {
+          orderId: 5,
+          productId: 1,
+          price: 10,
+          amount: 1,
+        },
+        {
+          orderId: 6,
+          productId: 1,
+          price: 10,
+          amount: 1,
+        },
+        {
+          orderId: 7,
+          productId: 1,
+          price: 10,
+          amount: 1,
+        },
       ])
     })
 }

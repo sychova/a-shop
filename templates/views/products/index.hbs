@@ -12,7 +12,13 @@
         <section class='page__toolbar toolbar'>
           <ul class='toolbar__list'>
             <li class='toolbar__item'>
-              <button id='addToCart' class='btn' title='Add product to Cart'>
+              <button
+                type='button'
+                class='btn'
+                data-toggle='modal'
+                data-target='#addModal'
+                title='Add to cart'
+              >
                 <span class='material-icons'>add_shopping_cart</span>
               </button>
             </li>
@@ -84,6 +90,7 @@
         </section>
       </main>
     </div>
+    {{>modalAddToCartMulti}}
     {{>scripts}}
     <script src='/js/products.js'></script>
   </body>

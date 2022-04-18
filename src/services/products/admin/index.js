@@ -5,9 +5,12 @@ const ProductCreator = require('./productCreator')
 const ProductDeleteService = require('./productDeleteService')
 const ProductRestoreService = require('./productRestoreService')
 const AdminProductUpdate = require('./productUpdate')
+const Paginator = require('../../paginator')
 
 module.exports = {
-  productsFetcher: new AdminProductsFetcher({ productRepo }),
+  productsFetcher: new AdminProductsFetcher({
+    paginator: new Paginator({ repo: productRepo, baseURL: '/admin/products' }),
+  }),
   productFetcher: new AdminProductFetcher({ productRepo }),
   productCreator: new ProductCreator({ productRepo }),
   productDelete: new ProductDeleteService({ productRepo }),

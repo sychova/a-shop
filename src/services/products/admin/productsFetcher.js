@@ -1,9 +1,12 @@
 const BaseProduct = require('../baseProduct')
 
 class AdminProductsFetcher extends BaseProduct {
-  async call() {
-    const products = await this.productRepo.all()
-    return products
+  async call(page) {
+    const { data, pagination } = await this.paginator.call(page)
+    return {
+      products: data,
+      pagination,
+    }
   }
 }
 

@@ -10,6 +10,14 @@ class ProductRepo extends BaseRepo {
     return 'products'
   }
 
+  get paginationQuery() {
+    return this.query.clone()
+  }
+
+  get paginationQueryActive() {
+    return this.query.whereNull('deletedAt').clone()
+  }
+
   async getActive() {
     const records = await this.query.whereNull('deletedAt')
     return this.map(records)
@@ -46,6 +54,21 @@ class ProductRepo extends BaseRepo {
       })
       .returning('*')
     return this.map(record)
+  }
+
+  async countPaginateActive() {
+    const [{ count }] = await this.paginationQueryActive.count('*')
+    return parseInt(count, 10)
+  }
+
+  async paginateActive({ offset, limit }) {
+    const records = await this.paginationQueryActive
+      .orderBy('id', 'desc')
+      .offset(offset)
+      .limit(limit)
+    return {
+      data: this.map(records),
+    }
   }
 }
 

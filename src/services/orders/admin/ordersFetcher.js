@@ -1,9 +1,12 @@
 const BaseOrder = require('../baseOrder')
 
 class AdminOrdersFetcher extends BaseOrder {
-  async call() {
-    const orders = await this.orderRepo.all()
-    return orders
+  async call(page) {
+    const { data, pagination } = await this.paginator.call(page)
+    return {
+      orders: data,
+      pagination,
+    }
   }
 }
 

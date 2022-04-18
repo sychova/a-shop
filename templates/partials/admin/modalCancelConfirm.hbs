@@ -1,9 +1,9 @@
 <div
   class='modal fade'
-  id='deleteModal'
+  id='cancelModal'
   tabindex='-1'
   role='dialog'
-  aria-labelledby='deleteModalLabel'
+  aria-labelledby='cancelModalLabel'
   aria-hidden='true'
   data-backdrop='static'
   data-keyboard='false'
@@ -11,24 +11,20 @@
   <div class='modal-dialog' role='document'>
     <div class='modal-content'>
       <div class='modal-header'>
-        <h5 class='modal-title' id='deleteModalLabel'>Warning</h5>
+        <h5 class='modal-title' id='cancelModalLabel'>Warning</h5>
       </div>
       <div class='modal-body'>
-        <span>Are you sure you want to delete {{product.name}}</span>
+        <span>Are you sure you want to leave without saving?</span>
       </div>
       <div class='modal-footer'>
-        <form action='/admin/products/{{product.id}}/delete' method='POST'>
-          <button
-            name='delete'
-            type='submit'
-            class='btn btn-primary'
-          >Delete</button>
-        </form>
         <button
           type='button'
           class='btn btn-secondary'
           data-dismiss='modal'
-        >Close</button>
+        >Stay</button>
+        <a id='cancel' href='/admin/products' class='btn' title='Cancel'>
+          <span>Leave</span>
+        </a>
       </div>
     </div>
   </div>

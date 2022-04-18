@@ -12,9 +12,15 @@
         <section class='page__toolbar toolbar'>
           <ul class='toolbar__list'>
             <li class='toolbar__item'>
-              <a href='/admin/products' class='btn' title='Close'>
+              <button
+                type='button'
+                class='btn btn-primary'
+                data-toggle='modal'
+                data-target='#cancelModal'
+                title='Cancel product'
+              >
                 <span class='material-icons'>close</span>
-              </a>
+              </button>
             </li>
           </ul>
         </section>
@@ -194,7 +200,7 @@
         </section>
       </main>
     </div>
-    {{>admin/modalDeleteSingle}}
+    {{>admin/modalCancelConfirm}}
     {{>scripts}}
     <script src='/js/admin/edit.js'></script>
   </body>

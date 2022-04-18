@@ -1,0 +1,33 @@
+<div
+  class='modal fade'
+  id='addModal'
+  tabindex='-1'
+  role='dialog'
+  aria-labelledby='addModalLabel'
+  aria-hidden='true'
+  data-backdrop='static'
+  data-keyboard='false'
+>
+  <div class='modal-dialog' role='document'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <h5 class='modal-title' id='addModalLabel'>Warning</h5>
+      </div>
+      <div class='modal-body'>
+        <span>The
+          {{product.name}}
+          has successfully been added to the cart!</span>
+      </div>
+      <div class='modal-footer'>
+        <a
+          id='add'
+          href='/products/{{product.id}}/add'
+          class='btn'
+          title='Add to Cart'
+        >
+          <span>Close</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
