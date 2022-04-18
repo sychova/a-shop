@@ -6,7 +6,8 @@ const {
 } = require('../services/products/index')
 
 const productsList = async (req, res) => {
-  const products = await productsFetcher.call()
+  const page = parseInt(req.query.page, 10)
+  const { products, pagination } = await productsFetcher.call(page)
   let cartCount
   if (req.cookies.cart) {
     const currentCart = req.cookies.cart && JSON.parse(req.cookies.cart)
@@ -19,7 +20,7 @@ const productsList = async (req, res) => {
       cartCount = currentCart.length
     }
   }
-  res.render('./products/index', { products, cartCount })
+  res.render('./products/index', { products, cartCount, pagination })
 }
 
 const show = async (req, res) => {

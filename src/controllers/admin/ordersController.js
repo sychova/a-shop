@@ -5,8 +5,9 @@ const {
 } = require('../../services/orders/admin/index')
 
 const ordersList = async (req, res) => {
-  const orders = await ordersFetcher.call()
-  res.render('./orders/admin/orders', { orders })
+  const page = parseInt(req.query.page, 10)
+  const { orders, pagination } = await ordersFetcher.call(page)
+  res.render('./orders/admin/orders', { orders, pagination })
 }
 
 const show = async (req, res) => {

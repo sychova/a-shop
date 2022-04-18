@@ -1,6 +1,7 @@
 class BaseProduct {
-  constructor({ productRepo }) {
+  constructor({ productRepo, paginator }) {
     this.productRepo = productRepo
+    this.paginator = paginator
   }
 }
 

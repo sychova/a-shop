@@ -22,6 +22,10 @@ class BaseRepo {
     return this.gateway(this.constructor.table)
   }
 
+  get paginationQuery() {
+    return this.query.clone()
+  }
+
   map(r) {
     if (Array.isArray(r)) {
       return r.map((record) => this.map(record))
@@ -63,6 +67,21 @@ class BaseRepo {
       .update(params)
       .returning('*')
     return this.map(record)
+  }
+
+  async paginate({ offset, limit }) {
+    const records = await this.paginationQuery
+      .orderBy('id', 'desc')
+      .offset(offset)
+      .limit(limit)
+    return {
+      data: this.map(records),
+    }
+  }
+
+  async countPaginate() {
+    const [{ count }] = await this.paginationQuery.count('*')
+    return parseInt(count, 10)
   }
 }
 

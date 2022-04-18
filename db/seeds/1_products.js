@@ -45,6 +45,56 @@ exports.seed = (knex) => {
           description: 'A very comfortable sofa',
           imagePath: '/img/products/sofa.jpg',
         },
+        {
+          name: 'Product1',
+          vendorCode: 'VENDOR3',
+          price: 1000,
+        },
+        {
+          name: 'Product2',
+          vendorCode: 'VENDOR3',
+          price: 1000,
+        },
+        {
+          name: 'Product3',
+          vendorCode: 'VENDOR3',
+          price: 1000,
+        },
+        {
+          name: 'Product4',
+          vendorCode: 'VENDOR3',
+          price: 1000,
+        },
+        {
+          name: 'Product5',
+          vendorCode: 'VENDOR3',
+          price: 1000,
+        },
+        {
+          name: 'Product6',
+          vendorCode: 'VENDOR3',
+          price: 1000,
+        },
+        {
+          name: 'Product7',
+          vendorCode: 'VENDOR3',
+          price: 1000,
+        },
+        {
+          name: 'Product8',
+          vendorCode: 'VENDOR3',
+          price: 1000,
+        },
+        {
+          name: 'Product9',
+          vendorCode: 'VENDOR3',
+          price: 1000,
+        },
+        {
+          name: 'Product10',
+          vendorCode: 'VENDOR3',
+          price: 1000,
+        },
       ])
     })
 }

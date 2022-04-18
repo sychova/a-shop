@@ -37,9 +37,14 @@ const schema = Joi.object({
 })
 
 const productsList = async (req, res) => {
-  const messages = await req.consumeFlash('success')
-  const products = await productsFetcher.call()
-  res.render('./products/admin/index', { products, messages })
+  const page = parseInt(req.query.page, 10)
+  const success = await req.consumeFlash('success')
+  const { products, pagination } = await productsFetcher.call(page)
+  res.render('./products/admin/index', {
+    products,
+    success,
+    pagination,
+  })
 }
 
 const show = async (req, res) => {

@@ -12,13 +12,15 @@
         <section class='page__toolbar toolbar'>
           <ul class='toolbar__list'>
             <li class='toolbar__item'>
-              <a
-                href='/products/{{product.id}}/add'
+              <button
+                type='button'
                 class='btn'
-                title='Add to Cart'
+                data-toggle='modal'
+                data-target='#addModal'
+                title='Add to cart'
               >
                 <span class='material-icons'>add_shopping_cart</span>
-              </a>
+              </button>
             </li>
             <li class='toolbar__item'>
               <a id='close' href='/products' class='btn' title='Close'>
@@ -27,6 +29,7 @@
             </li>
           </ul>
         </section>
+        {{>toast}}
         <section class='page__product-block product-block'>
           <div class='product-block__container __container'>
             <div class='product-info card'>
@@ -98,6 +101,8 @@
         </section>
       </main>
     </div>
+    {{>modalAddToCartSingle}}
+    {{>scripts}}
   </body>
 
 </html>
