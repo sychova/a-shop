@@ -2,10 +2,13 @@ const fs = require('fs')
 const path = require('path')
 const appRoot = require('app-root-path')
 
-const validation = async (schema, req) => {
-  const entityValidation = await schema.validate(req.body, {
-    abortEarly: false,
-  })
+const validation = async (schema, req, additionalPayloadToValidate) => {
+  const entityValidation = await schema.validate(
+    { ...req.body, ...additionalPayloadToValidate },
+    {
+      abortEarly: false,
+    },
+  )
   const entityErrors = {}
 
   if (req.fileError) entityErrors.file = req.fileError

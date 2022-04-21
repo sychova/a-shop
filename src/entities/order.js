@@ -13,8 +13,8 @@ class Order extends BaseEntity {
     return this.attr.totalPrice
   }
 
-  get deliveryMethod() {
-    return this.attr.deliveryMethod
+  get selfPickup() {
+    return this.attr.selfPickup
   }
 
   get deliveryAddress() {

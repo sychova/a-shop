@@ -1,3 +1,4 @@
+const Joi = require('joi')
 const {
   productsInCartUpdateService,
   ProductsInCartUpdateService,
@@ -7,6 +8,38 @@ const { orderCreator } = require('../services/orders/index')
 
 const AVAILABILITY_WARNING =
   'Some of the selected products are no longer available. They have been removed from the cart.'
+
+const { validation } = require('../middlewares/validation')
+
+const schema = Joi.object({
+  customerName: Joi.string().required().min(1).max(20).messages({
+    'string.empty': 'This field is required',
+    'string.min':
+      'Min characters for this field is 1. Max characters for this field is 20',
+    'string.max':
+      'Min characters for this field is 1. Max characters for this field is 20',
+  }),
+  customerEmail: Joi.string()
+    .email({ minDomainSegments: 2 })
+    .required()
+    .messages({
+      'string.empty': 'This field is required',
+      'string.email': 'Your email is in a not correct format',
+    }),
+  selfPickup: Joi.string().allow(''),
+  deliveryAddress: Joi.string()
+    .when('selfPickup', {
+      is: false,
+      then: Joi.string().required().min(10),
+    })
+    .messages({
+      'string.empty': 'This field is required',
+      'string.min': 'Min characters for this field is 10.',
+    }),
+  promoId: Joi.string(),
+  value: Joi.string(),
+  products: Joi.array().min(1).required(),
+})
 
 const cart = async (req, res) => {
   try {
@@ -147,6 +180,17 @@ const create = async (req, res) => {
     const { products, cartTotal } = await productsInCartUpdateService.call(
       currentCart,
     )
+    const orderErrors = await validation(schema, req, { products })
+    if (orderErrors) {
+      res.status(400).render('./orders/checkout', {
+        errors: orderErrors,
+        order: req.body,
+        products,
+        cartTotal,
+      })
+      return
+    }
+
     await orderCreator.call({ order: req.body, products, cartTotal })
     res.clearCookie('cart')
     res.redirect('/products')
