@@ -47,61 +47,139 @@
                   <div class='form-row'>
                     <div class='form-group col-md-6'>
                       <label for='customerName'>Customer name:</label>
-                      <input
-                        type='text'
-                        class='form-control'
-                        id='customerName'
-                        name='customerName'
-                      />
+                      {{#if errors.customerName}}
+                        <input
+                          type='text'
+                          class='form-control is-invalid'
+                          id='customerName'
+                          name='customerName'
+                          value='{{order.customerName}}'
+                        />
+                        <span class='text-danger'>{{errors.customerName}}</span>
+                      {{else}}
+                        <input
+                          type='text'
+                          class='form-control'
+                          id='customerName'
+                          name='customerName'
+                          value='{{order.customerName}}'
+                        />
+                      {{/if}}
                     </div>
                     <div class='form-group col-md-6'>
                       <label for='customerEmail'>Customer email:</label>
-                      <input
-                        type='email'
-                        class='form-control'
-                        id='customerEmail'
-                        name='customerEmail'
-                      />
+                      {{#if errors.customerEmail}}
+                        <input
+                          type='text'
+                          class='form-control is-invalid'
+                          id='customerEmail'
+                          name='customerEmail'
+                          value='{{order.customerEmail}}'
+                        />
+                        <span
+                          class='text-danger'
+                        >{{errors.customerEmail}}</span>
+                      {{else}}
+                        <input
+                          type='text'
+                          class='form-control'
+                          id='customerEmail'
+                          name='customerEmail'
+                          value='{{order.customerEmail}}'
+                        />
+                      {{/if}}
                     </div>
                   </div>
                   <div class='form-row'>
                     <legend class='col-form-label col-sm-2 pt-0'>Delivery
                       method:</legend>
-                    <div class='form-check form-check-inline'>
-                      <input
-                        class='form-check-input'
-                        type='radio'
-                        name='deliveryMethod'
-                        id='self'
-                        value='self'
-                        checked
-                      />
-                      <label
-                        class='form-check-label'
-                        for='self'
-                      >Self-pickup</label>
-                    </div>
-                    <div class='form-check form-check-inline'>
-                      <input
-                        class='form-check-input'
-                        type='radio'
-                        name='deliveryMethod'
-                        id='address'
-                        value='address'
-                      />
-                      <label class='form-check-label' for='address'>Delivery
-                        address</label>
-                    </div>
+                    {{#if order.selfPickup}}
+                      <div class='form-check form-check-inline'>
+                        <input
+                          class='form-check-input'
+                          type='radio'
+                          name='selfPickup'
+                          id='self'
+                          value='true'
+                          checked
+                        />
+                        <label
+                          class='form-check-label'
+                          for='self'
+                        >Self-pickup</label>
+                      </div>
+                      <div class='form-check form-check-inline'>
+                        <input
+                          class='form-check-input'
+                          type='radio'
+                          name='selfPickup'
+                          id='address'
+                          value=''
+                        />
+                        <label class='form-check-label' for='address'>Delivery
+                          address</label>
+                      </div>
+                    {{else}}
+                      <div class='form-check form-check-inline'>
+                        <input
+                          class='form-check-input'
+                          type='radio'
+                          name='selfPickup'
+                          id='self'
+                          value='true'
+                        />
+                        <label
+                          class='form-check-label'
+                          for='self'
+                        >Self-pickup</label>
+                      </div>
+                      <div class='form-check form-check-inline'>
+                        <input
+                          class='form-check-input'
+                          type='radio'
+                          name='selfPickup'
+                          id='address'
+                          value=''
+                          checked
+                        />
+                        <label class='form-check-label' for='address'>Delivery
+                          address</label>
+                      </div>
+                    {{/if}}
                   </div>
                   <div class='form-group'>
-                    <input
-                      type='text'
-                      class='form-control'
-                      id='deliveryAddress'
-                      name='deliveryAddress'
-                      disabled
-                      placeholder='1234 Main St'
-                    />
+                    {{#if order.selfPickup}}
+                      <input
+                        type='text'
+                        class='form-control'
+                        id='deliveryAddress'
+                        name='deliveryAddress'
+                        disabled
+                        placeholder='1234 Main St'
+                      />
+                    {{else}}
+                      {{#if errors.deliveryAddress}}
+                        <input
+                          type='text'
+                          class='form-control is-invalid'
+                          id='deliveryAddress'
+                          name='deliveryAddress'
+                          placeholder='1234 Main St'
+                          value='{{order.deliveryAddress}}'
+                        />
+                        <span
+                          class='text-danger'
+                        >{{errors.deliveryAddress}}</span>
+                      {{else}}
+                        <input
+                          type='text'
+                          class='form-control'
+                          id='deliveryAddress'
+                          name='deliveryAddress'
+                          placeholder='1234 Main St'
+                        />
+                      {{/if}}
+                    {{/if}}
                   </div>
                   <input
                     type='hidden'
@@ -169,6 +247,9 @@
                     <span class='price'>{{cartTotal}}</span>
                   {{/if}}
                 </h5>
+                {{#if errors.products}}
+                  <span class='text-danger'>Your order cannot be empty.</span>
+                {{/if}}
                 <table class='table'>
                   <thead>
                     <tr>

@@ -14,7 +14,7 @@ class OrderCreator extends BaseOrder {
       totalPrice: parseInt(order.promoId, 10)
         ? (parseInt(order.value, 10) * cartTotal) / 100
         : cartTotal,
-      deliveryMethod: order.deliveryMethod,
+      selfPickup: !!order.selfPickup,
       deliveryAddress: order.deliveryAddress,
     }
     return this.orderRepo.create(newOrder)

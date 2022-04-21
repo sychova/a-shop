@@ -5,15 +5,11 @@ exports.up = async (knex) => {
     t.string('customer_email').notNullable()
     t.integer('promo_id').references('id').inTable('promos').unsigned()
     t.integer('total_price').notNullable()
-    t.enu('delivery_method', ['self', 'address'], {
-      useNative: true,
-      enumName: 'delivery_method',
-    }).notNullable()
+    t.boolean('self_pickup').notNullable()
     t.text('delivery_address')
   })
 }
 
 exports.down = async (knex) => {
   await knex.schema.dropTable('orders')
-  await knex.raw('DROP TYPE delivery_method')
 }
