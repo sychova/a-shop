@@ -43,7 +43,7 @@ class ProductRepo extends BaseRepo {
         deletedAt: new Date(),
       })
       .returning('*')
-    return this.map(record)
+    return this.mapOrNotFound(record)
   }
 
   async restoreProducts(ids) {

@@ -54,7 +54,9 @@ const show = async (req, res) => {
     res.render('./products/admin/show', { product })
   } catch (error) {
     console.error(error)
-    res.status(500).render('./errorAdmin', { error: error.message })
+    res.status(404).render('./products/notFound', {
+      error: error.message,
+    })
   }
 }
 
@@ -77,6 +79,7 @@ const create = async (req, res) => {
     await req.flash('success', 'Your product has successfully been created!')
     res.redirect('/admin/products')
   } catch (error) {
+    console.log(error)
     res.status(500).render('./errorAdmin', { error: error.message })
   }
 }
@@ -91,7 +94,9 @@ const edit = async (req, res) => {
     })
   } catch (error) {
     console.error(error)
-    res.status(500).render('./errorAdmin', { error: error.message })
+    res.status(404).render('./products/notFound', {
+      error: error.message,
+    })
   }
 }
 
@@ -108,6 +113,7 @@ const update = async (req, res) => {
     }
 
     await productUpdate.call(req.params.productId, req.body, req.file)
+
     res.redirect(`/admin/products/${req.params.productId}`)
   } catch (error) {
     console.error(error)

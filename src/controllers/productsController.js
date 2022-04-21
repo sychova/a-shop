@@ -31,7 +31,9 @@ const show = async (req, res) => {
     res.render('./products/show', { product, cartCount })
   } catch (error) {
     console.error(error)
-    res.status(500).render('./error', { error: error.message })
+    res.status(404).render('./products/notFound', {
+      error: error.message,
+    })
   }
 }
 

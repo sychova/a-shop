@@ -17,7 +17,9 @@ const show = async (req, res) => {
     res.render('./orders/admin/show', { order, products })
   } catch (error) {
     console.error(error)
-    res.status(500).render('./errorAdmin', { error: error.message })
+    res.status(404).render('./orders/notFound', {
+      error: error.message,
+    })
   }
 }
 
