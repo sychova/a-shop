@@ -6,7 +6,6 @@ const { productFactory } = require('../../helpers/factories')
 describe('controllers/products/update', () => {
   let product = null
   let productUpdated = null
-  let errors = null
   let req = null
   let res = null
   describe('updates the existing product and redirects to view', () => {
@@ -62,13 +61,6 @@ describe('controllers/products/update', () => {
         isDeleted: '',
       }
 
-      errors = {
-        isDeleted: '"isDeleted" is not allowed to be empty',
-        name: 'This field is required',
-        price: 'This field is required and must be a number',
-        vendorCode: 'This field is required',
-      }
-
       req = {
         params: {
           productId: product.id,
@@ -97,8 +89,13 @@ describe('controllers/products/update', () => {
       expect(res.render).toHaveBeenCalledTimes(1)
       expect(res.render).toHaveBeenLastCalledWith('./products/admin/edit', {
         productId: req.params.productId,
-        errors,
-        product: productUpdated,
+        errors: {
+          isDeleted: '"isDeleted" is not allowed to be empty',
+          name: 'This field is required',
+          price: 'This field is required and must be a number',
+          vendorCode: 'This field is required',
+        },
+        product: req.body,
       })
     })
   })
